@@ -1,31 +1,37 @@
-# Image classification with PowerAI Vision
+# Object detection with PowerAI Vision
 
-In this Code Pattern, we will use PowerAI Vision's Static Image Classification to create
-a classifier that can recognize different types of vehicle damage.
-Deep learning training will be used to create a model.
-By deploying the model, we create a REST endpoint which can be used to
-classify vehicle damage images.
-We can test the model in the PowerAI Vision UI.
-We'll also build an example app showing how to use the classifier from a web page.
+In this Code Pattern, we will use PowerAI Vision Object Detection
+to detect and label objects, within an image, based on customized
+training.
 
 > This example can easily be customized with your own datasets.
 
+A example dataset has been provided with images of Coca-Cola bottles.
+Once we train and deploy a model, we'll have a REST endpoint
+that allows us locate and count Coke bottles in an image.
+
+Deep learning training will be used to create a model for
+Object Detection. With PowerAI Vision, deep learning training is
+as easy as a few clicks of a mouse. Once the task has completed,
+the model can be deployed with another click.
+
+PowerAI Vision presents REST APIs for inference operations.
+Object detection with your custom model can be used from any REST
+client and can also be tested in the PowerAI Vision UI.
+
 When the reader has completed this Code Pattern, they will understand how to:
 
-* Create a dataset for image classification with PowerAI Vision
-* Train and deploy a model based on the dataset classes
-* Test the model
-* Use the REST API to integrate the classifier in to an app
+* Create a dataset for object detection with PowerAI Vision
+* Train and deploy a model based on the dataset
+* Test the model via REST calls
 
-<!--Remember to dump an image in this path-->
 ![](doc/source/images/architecture.png)
 
-
 ## Flow
-<!--Add new flow steps based on the architecture diagram-->
-1. User runs the example app
-2. An image is posted to the REST API endpoint
-3. PowerAI Vision returns the image classification
+1. User uploads images to create a PowerAI Vision dataset
+1. User labels objects in the image dataset prior to training
+1. The model is trained, deployed and tested in PowerAI Vision
+1. User can detect objects in images using a REST client
 
 <!-- TODO:
 ## Included components
@@ -43,14 +49,29 @@ When the reader has completed this Code Pattern, they will understand how to:
 [![](http://img.youtube.com/vi/Jxi7U7VOMYg/0.jpg)](https://www.youtube.com/watch?v=Jxi7U7VOMYg)
 -->
 
+# Prerequisites
+
+*This Code Pattern was built with the PowerAI Vision Technology Preview v3.0.*
+
+Go to [Try Power AI](https://developer.ibm.com/linuxonpower/deep-learning-powerai/try-powerai/) 
+and use `On Premise` to download an installer to deploy the preview on
+your Power Systems, or use `SuperVessel` and register for access to the
+SuperVessel cloud where you can try the preview.
+
+![](doc/source/images/try-powerai.png)
+
+<!-- TODO: how to adapt to on premise? -->
+> NOTE: The steps and examples in this README assume you are using SuperVessel.
+
 # Steps
+
+<!-- TODO: Update the repo and tracking id -->
+<!-- TODO: Will be used if we have an example app to deploy -->
+<!--
 Use the ``Deploy to IBM Cloud`` button **OR** run locally.
 
 ## Deploy to IBM Cloud
-<!-- TODO: Update the repo and tracking id
-[![Deploy to IBM Cloud](https://metrics-tracker.mybluemix.net/stats/527357940ca5e1027fbf945add3b15c4/button.svg)](https://bluemix.net/deploy?repository=https://github.com/IBM/watson-banking-chatbot.git)
--->
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/powerai-vehicle-damage-analyzer)
+[![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/powerai-vehicle-damage-analyzer)
 
 
 1. Press the above ``Deploy to IBM Cloud`` button and then click on ``Deploy``.
@@ -58,20 +79,85 @@ Use the ``Deploy to IBM Cloud`` button **OR** run locally.
 2. In Toolchains, click on Delivery Pipeline to watch while the app is deployed. Once deployed, the app can be viewed by clicking 'View app'.
 
 3. Use the IBM Cloud dashboard to manage the app. The app is named `powerai-vehicle-damage-analyzer` with a unique suffix.
+-->
 
 ## Run locally
+
+<!--
 > NOTE: These steps are only needed when running locally instead of using the ``Deploy to IBM Cloud`` button.
+-->
 
-<!-- TODO: expand each step -->
+1. [Clone the repo](#1-clone-the-repo)
+2. [Login to PowerAI Vision](#2-login-to-powerai-vision)
+3. [Create a dataset](#3-create-a-dataset)
+4. [Create tags and label objects](#4-create-tags-and-label-objects)
+5. [Create a DL task](#5-create-a-dl-task)
+6. [Deploy and test](#6-deploy-and-test)
 
-1. [Install Node.js](https://nodejs.org/en/download/)
-1. Clone the repo
-1. cd into this project's root directory
-1.  Run `npm install` to install the app's dependencies 
-1. Run `npm start` to start the app
-1. Access the running app in a browser at <http://localhost:8081>
-<!-- TODO: show how the app works -->
+### 1. Clone the repo
 
+Clone the `powerai-vision-object-detection` locally. In a terminal, run:
+
+```
+git clone https://github.com/IBM/powerai-vision-object-detection
+```
+
+### 2. Login to PowerAI Vision
+
+If you are using SuperVessel, login here: https://ny1.ptopenlab.com/AIVision/index.html
+
+### 3. Create a dataset
+
+PowerAI Vision Object Detection discovers and labels objects within an image, enabling users and developers to count instances of objects within an image based on customized training.
+
+To create a new dataset for object detection training:
+
+1. From the `My Data Sets` view, click the `Add Dataset` button and then select `For Object Detection` in the pull-down.
+![add_dataset](doc/source/images/add_dataset.png)
+
+1. Provide a DataSet Name and click `Add Dataset`.
+![add_dataset_name](doc/source/images/add_dataset_name.png)
+
+1. Upload one or more images using drag-and-drop or `Select some`. You can use `powerai-vision-object-detection/data/coke_bottles.zip` from your cloned repo to upload many at once.
+![update_dataset](doc/source/images/update_dataset.png)
+
+> Note: If you are using your own zip file and do not see file thumbnails after the upload, then the upload failed. Use lowercase file names without special characters or spaces. You can also upload individual files or multi-select several at a time to determine which file caused the upload to fail.
+
+<!-- TODO: set1, set2 (for better results...), testset -->
+
+### 4. Create tags and label objects
+
+1. Create one or more tags by clicking the `+` icon to add a new tag. Each tag will represent the training objects within the image based on specific use cases (e.g., "Coca-Cola", "Diet Coke", "Coke Zero").
+
+1. Label the objects in each image by selecting a tag and dragging a bounding box around the object in the image. Press `Save` when done with each image.
+
+1. Repeat this process for all tags and all images.
+![add_dataset](doc/source/images/save_labels.png)
+
+> Tip: Use the `Only Show Unlabeled Files` pull-down to help you see when you are done.
+
+1. Click `Export As Zip File` to save a copy of your work. Now that you've spent some time labeling, this zip will let you start over without losing your work.
+
+### 5. Create a DL task
+
+Click on `My DL Tasks` under My Workspace and then click the `Create New Task` button. Click on `Object Detection`.
+
+Give the Object Detector a name and make sure your dataset is selected, then click `Build Model`.
+![build_model](doc/source/images/build_model.png)
+
+A confirmation dialog will give you a time estimate.  Click `Create New Task` to get it started.
+![create_task_confirm](doc/source/images/create_task_confirm.png)
+
+### 6. Deploy and test
+
+When the model is built, click on `Deploy and Test`.
+![model_built](doc/source/images/model_built.png)
+
+
+
+<!-- TODO: upload as labelled zip -->
+
+<!-- TODO: add this w/ new tracker when/if we have a tracked app
 # Privacy Notice
 If using the `Deploy to IBM Cloud` button some metrics are tracked, the following
 information is sent to a [Deployment Tracker](https://github.com/IBM/cf-deployment-tracker-service) service
@@ -92,12 +178,12 @@ This data is collected from the `package.json` file in the sample application an
 
 ## Disabling Deployment Tracking
 To disable tracking, simply remove ``require("cf-deployment-tracker-client").track();`` from the ``app.js`` file in the top level directory.
+-->
 
+<!--
 # Links
-* [Demo on Youtube](https://www.youtube.com/watch?v=Jxi7U7VOMYg)
-* [Watson Node.js SDK](https://github.com/watson-developer-cloud/node-sdk)
-* [Relevancy Training Demo Video](https://www.youtube.com/watch?v=8BiuQKPQZJk)
-* [Relevancy Training Demo Notebook](https://github.com/akmnua/relevancy_passage_bww)
+* [Demo on Youtube](https://www.youtube.com/watch?v=XXXXXXXXXXX)
+ -->
 
 # Learn more
 * **Artificial Intelligence Code Patterns**: Enjoyed this Code Pattern? Check out our other [AI Code Patterns](https://developer.ibm.com/code/technologies/artificial-intelligence/).
