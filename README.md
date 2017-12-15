@@ -64,7 +64,6 @@ SuperVessel cloud where you can try the preview.
 
 ![](doc/source/images/try-powerai.png)
 
-<!-- TODO: how to adapt to on premise? -->
 > NOTE: The steps and examples in this README assume you are using SuperVessel.
 
 # Steps
@@ -83,11 +82,9 @@ Use the ``Deploy to IBM Cloud`` button **OR** run locally.
 2. In Toolchains, click on Delivery Pipeline to watch while the app is deployed. Once deployed, the app can be viewed by clicking 'View app'.
 
 3. Use the IBM Cloud dashboard to manage the app. The app is named `powerai-vehicle-damage-analyzer` with a unique suffix.
--->
 
 ## Run locally
 
-<!--
 > NOTE: These steps are only needed when running locally instead of using the ``Deploy to IBM Cloud`` button.
 -->
 
@@ -116,73 +113,79 @@ PowerAI Vision Object Detection discovers and labels objects within an image, en
 
 To create a new dataset for object detection training:
 
-1. From the `My Data Sets` view, click the `Add Dataset` button and then select `For Object Detection` in the pull-down.
-![add_dataset](doc/source/images/add_dataset.png)
+* From the `My Data Sets` view, click the `Add Dataset` button and then select `For Object Detection` in the pull-down.
 
-1. Provide a DataSet Name and click `Add Dataset`.
-![add_dataset_name](doc/source/images/add_dataset_name.png)
+  ![add_dataset](doc/source/images/add_dataset.png)
 
-1. Upload one or more images using drag-and-drop or `Select some`. You can use `powerai-vision-object-detection/data/coke_bottles.zip` from your cloned repo to upload many at once.
-![update_dataset](doc/source/images/update_dataset.png)
+* Provide a DataSet Name and click `Add Dataset`.
 
-> Note: If you are using your own zip file and do not see file thumbnails after the upload, then the upload failed. Use lowercase file names without special characters or spaces. You can also upload individual files or multi-select several at a time to determine which file caused the upload to fail.
+  <img alt="add_dataset_name" src="doc/source/images/add_dataset_name.png" width="400">
+
+* Upload one or more images using drag-and-drop or `Select some`. You can use `powerai-vision-object-detection/data/coke_bottles.zip` from your cloned repo to upload many at once.
+
+  ![update_dataset](doc/source/images/update_dataset.png)
+
+  > Note: If you are using your own zip file and do not see file thumbnails after the upload, then the upload failed. Use lowercase file names without special characters or spaces. You can also upload individual files or multi-select several at a time to determine which file caused the upload to fail.
 
 <!-- TODO: set1, set2 (for better results...), testset -->
 
 ### 4. Create tags and label objects
 
-1. Create one or more tags by clicking the `+` icon to add a new tag. Each tag will represent the training objects within the image based on specific use cases (e.g., "Coca-Cola", "Diet Coke", "Coke Zero").
+* Create one or more tags by clicking the `+` icon to add a new tag. Each tag will represent the training objects within the image based on specific use cases (e.g., "Coca-Cola", "Diet Coke", "Coke Zero").
 
-1. Label the objects in each image by selecting a tag and dragging a bounding box around the object in the image. Press `Save` when done with each image.
+* Label the objects in each image by selecting a tag and dragging a bounding box around the object in the image. Press `Save` when done with each image.
 
-1. Repeat this process for all tags and all images.
-![add_dataset](doc/source/images/save_labels.png)
-    > Tip: Use the `Only Show Unlabeled Files` pull-down to help you see when you are done.
+* Repeat this process for all tags and all images.
 
-1. Click `Export As Zip File` to save a copy of your work. Now that you've spent some time labeling, this zip will let you start over without losing your work.
+  ![add_dataset](doc/source/images/save_labels.png)
+
+  > Tip: Use the `Only Show Unlabeled Files` pull-down to help you see when you are done.
+
+* Click `Export As Zip File` to save a copy of your work. Now that you've spent some time labeling, this zip will let you start over without losing your work.
 
 ### 5. Create a DL task
 
-1. Click on `My DL Tasks` under My Workspace and then click the `Create New Task` button. Click on `Object Detection`.
+* Click on `My DL Tasks` under My Workspace and then click the `Create New Task` button. Click on `Object Detection`.
 
-1. Give the Object Detector a name and make sure your dataset is selected, then click `Build Model`.
-![build_model](doc/source/images/build_model.png)
+* Give the Object Detector a name and make sure your dataset is selected, then click `Build Model`.
 
-1. A confirmation dialog will give you a time estimate.  Click `Create New Task` to get it started.
-![create_task_confirm](doc/source/images/create_task_confirm.png)
+  ![build_model](doc/source/images/build_model.png)
+
+* A confirmation dialog will give you a time estimate.  Click `Create New Task` to get it started.
+
+  <img alt="create_task_confirm" src="doc/source/images/create_task_confirm.png" width="400">
 
 ### 6. Deploy and test
 
-When the model is built, click on `Deploy and Test`.
+* When the model is built, click on `Deploy and Test`.
 
-![model_built](doc/source/images/model_built.png)
+  ![model_built](doc/source/images/model_built.png)
 
+* Test your model in the PowerAI Vision UI. Use `Select some` to choose a test image. The result shows you how many objects were detected and the image is shown with bounding boxes, labels and confidence scores.
 
+  ![test_ui](doc/source/images/test_ui.png)
 
-<!-- TODO: upload as labelled zip -->
+* From a command-line, you can test your deployed REST endpoint using an image file and the `curl` command. Notice the output JSON shows multiple bottles were detected and provides the confidence, label and location for each of them.
+  > Warning: this example used `--insecure` for convenience.
 
-<!-- TODO: add this w/ new tracker when/if we have a tracked app
-# Privacy Notice
-If using the `Deploy to IBM Cloud` button some metrics are tracked, the following
-information is sent to a [Deployment Tracker](https://github.com/IBM/cf-deployment-tracker-service) service
-on each deployment:
+  ```bash
+  $ curl --insecure -i -F files=@coke_bottle_23.png https://ny1.ptopenlab.com/AIVision/api/dlapis/9f9d6787-0183-4a1b-be49-751b6ca16724
+  HTTP/1.1 100 Continue
 
-* Node.js package version
-* Node.js repository URL
-* Application Name (`application_name`)
-* Application GUID (`application_id`)
-* Application instance index number (`instance_index`)
-* Space ID (`space_id`)
-* Application Version (`application_version`)
-* Application URIs (`application_uris`)
-* Labels of bound services
-* Number of instances for each bound service and associated plan information
+  HTTP/1.1 200 OK
+  Server: nginx/1.9.13
+  Date: Thu, 14 Dec 2017 21:58:26 GMT
+  Content-Type: application/json
+  Content-Length: 508
+  Connection: keep-alive
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Headers: origin, content-type, accept, authorization
+  Access-Control-Allow-Credentials: true
+  Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS, HEAD
+  Access-Control-Allow-Origin: *
 
-This data is collected from the `package.json` file in the sample application and the `VCAP_APPLICATION` and `VCAP_SERVICES` environment variables in IBM Cloud and other Cloud Foundry platforms. This data is used by IBM to track metrics around deployments of sample applications to IBM Cloud to measure the usefulness of our examples, so that we can continuously improve the content we offer to you. Only deployments of sample applications that include code to ping the Deployment Tracker service will be tracked.
-
-## Disabling Deployment Tracking
-To disable tracking, simply remove ``require("cf-deployment-tracker-client").track();`` from the ``app.js`` file in the top level directory.
--->
+  { "classified" : [ { "confidence" : 0.9986369013786316 , "ymax" : 578 , "label" : "coca-cola" , "xmax" : 755 , "xmin" : 588 , "ymin" : 29} , { "confidence" : 0.9954010248184204 , "ymax" : 592 , "label" : "coca-cola" , "xmax" : 601 , "xmin" : 437 , "ymin" : 10} , { "confidence" : 0.8161203265190125 , "ymax" : 567 , "label" : "coca-cola" , "xmax" : 426 , "xmin" : 259 , "ymin" : 17}] , "imageUrl" : "http://ny1.ptopenlab.com:443/AIVision/temp/5a26dd3b-d8ba-4e01-8b93-5a43f28e97c7.png" , "result" : "success"}
+  ```
 
 <!--
 # Links
