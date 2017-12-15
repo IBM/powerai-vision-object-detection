@@ -33,14 +33,18 @@ When the reader has completed this Code Pattern, they will understand how to:
 1. The model is trained, deployed and tested in PowerAI Vision
 1. User can detect objects in images using a REST client
 
-<!-- TODO:
 ## Included components
-* [Component](link): description
-* [Component](link): description
+* [IBM Power Systems](https://www-03.ibm.com/systems/power/): A server built with open technologies and designed for mission-critical applications.
+* [IBM PowerAI](https://www.ibm.com/ms-en/marketplace/deep-learning-platform): A software platform that makes deep learning, machine learning, and AI more accessible and better performing.
+* [IBM PowerAI Vision Technology Preview](https://developer.ibm.com/linuxonpower/deep-learning-powerai/technology-previews/powerai-vision/): A complete ecosystem for labeling datasets, training, and deploying deep learning models for computer vision.
 
 ## Featured technologies
-* [Technology](link): description
-* [Technology](link): description
+* [Artificial Intelligence](https://medium.com/ibm-data-science-experience): Artificial intelligence can be applied to disparate solution spaces to deliver disruptive technologies.
+
+<!-- TODO: Depending on what demo app...
+* [Mobile](https://mobilefirstplatform.ibmcloud.com/): Systems of engagement are increasingly using mobile technology as the platform for delivery.
+* [Node.js](https://nodejs.org/): An open-source JavaScript run-time environment for executing server-side JavaScript code.
+* [Python](https://www.python.org/): Python is a programming language that lets you work more quickly and integrate your systems more effectively.
 -->
 
 <!--Update this section when the video is created-->
@@ -133,24 +137,24 @@ To create a new dataset for object detection training:
 
 1. Repeat this process for all tags and all images.
 ![add_dataset](doc/source/images/save_labels.png)
-
-> Tip: Use the `Only Show Unlabeled Files` pull-down to help you see when you are done.
+    > Tip: Use the `Only Show Unlabeled Files` pull-down to help you see when you are done.
 
 1. Click `Export As Zip File` to save a copy of your work. Now that you've spent some time labeling, this zip will let you start over without losing your work.
 
 ### 5. Create a DL task
 
-Click on `My DL Tasks` under My Workspace and then click the `Create New Task` button. Click on `Object Detection`.
+1. Click on `My DL Tasks` under My Workspace and then click the `Create New Task` button. Click on `Object Detection`.
 
-Give the Object Detector a name and make sure your dataset is selected, then click `Build Model`.
+1. Give the Object Detector a name and make sure your dataset is selected, then click `Build Model`.
 ![build_model](doc/source/images/build_model.png)
 
-A confirmation dialog will give you a time estimate.  Click `Create New Task` to get it started.
+1. A confirmation dialog will give you a time estimate.  Click `Create New Task` to get it started.
 ![create_task_confirm](doc/source/images/create_task_confirm.png)
 
 ### 6. Deploy and test
 
 When the model is built, click on `Deploy and Test`.
+
 ![model_built](doc/source/images/model_built.png)
 
 
