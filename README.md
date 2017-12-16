@@ -6,7 +6,7 @@ training.
 
 > This example can easily be customized with your own datasets.
 
-A example dataset has been provided with images of Coca-Cola bottles.
+An example dataset has been provided with images of Coca-Cola bottles.
 Once we train and deploy a model, we'll have a REST endpoint
 that allows us locate and count Coke bottles in an image.
 
