@@ -25,7 +25,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 * Train and deploy a model based on the dataset
 * Test the model via REST calls
 
-![](doc/source/images/architecture.png)
+![architecture](doc/source/images/architecture.png)
 
 ## Flow
 1. User uploads images to create a PowerAI Vision dataset
