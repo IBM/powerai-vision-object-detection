@@ -1,0 +1,49 @@
+/**
+ * Copyright 2017 IBM Corp. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the 'License'); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an 'AS IS' BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
+'use strict';
+/* eslint-env node */
+
+const express = require('express');
+const request = require('request');
+
+const app = express();
+const port = process.env.PORT || process.env.VCAP_APP_PORT || 8081;
+
+require('metrics-tracker-client').track();
+
+app.use(express.static(__dirname));
+
+app.post("/uploadpic", function (req, result) {
+
+  let res = req.pipe(request.post({
+    url: 'https://ny1.ptopenlab.com/AIVision/api/dlapis/6f6d6787-0183-4a1b-be49-751b6ca16724',
+    agentOptions: {
+      rejectUnauthorized: false
+    }}, function (err, resp, body) {
+    if (err) {
+      console.log(err);
+    }
+    // console.log(resp);
+    console.log(body);
+    result.send({data: body});
+  }));
+});
+
+app.listen(port, () => {
+  console.log(`Server starting on ${port}`);
+});
+

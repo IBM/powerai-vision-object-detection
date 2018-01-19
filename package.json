@@ -1,0 +1,33 @@
+{
+  "name": "powerai-vision-object-detection",
+  "description": "Use PowerAI Vision for Object Detection.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IBM/powerai-vision-object-detection.git"
+  },
+  "keywords": [
+    "PowerAI"
+  ],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/IBM/powerai-vision-object-detection/issues"
+  },
+  "homepage": "https://github.com/IBM/powerai-vision-object-detection#readme",
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "lint": "npm run lint:javascript",
+    "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore"
+  },
+  "dependencies": {
+    "express": "4.16.2",
+    "formidable": "1.1.1",
+    "metrics-tracker-client": "^0.2.3",
+    "request": "2.83.0"
+  },
+  "engines": {
+    "node": "8.x"
+  }
+}
