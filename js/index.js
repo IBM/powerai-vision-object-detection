@@ -29,20 +29,67 @@ function addRow(table, cellType, values) {
   table.appendChild(row);
 }
 
-function drawBoundaryBoxes(detectedObjects, ctx) {
+// TODO: These should just be dicts
+function textColor(label) {
+  switch (label) {
+    case 'coca-cola': return 'white';
+    case 'diet coke': return 'red';
+    case 'coke zero': return 'white';
+    default: return 'cornsilk';
+  }
+}
+
+function boundaryColor(label) {
+  switch (label) {
+    case 'coca-cola': return 'red';
+    case 'diet coke': return 'silver';
+    case 'coke zero': return 'black';
+    default: return 'cornflowerblue';
+  }
+}
+
+function countByLabel(detectedObjects) {
+
+  let countByLabel = {};
   if (detectedObjects.length > 0) {
     for (let i = 0; i < detectedObjects.length; i++) {
       const obj = detectedObjects[i];
-      ctx.strokeStyle="#FF0000";
-      ctx.lineWidth = 10;
+      const label = obj['label'];
+      countByLabel[label] = (countByLabel[label] || 0) + 1;
+    }
+  }
+
+  let ret_strings = [];
+  for (const key in countByLabel) {
+    if (countByLabel.hasOwnProperty(key)) {
+      ret_strings.push(countByLabel[key] + ' ' + key);  // e.g. 1 coca-cola
+    }
+  }
+  return ret_strings.join(', ');
+}
+
+function drawBoundaryBoxes(detectedObjects, ctx) {
+
+  ctx.lineWidth = 5;
+  ctx.font="24px serif";
+
+  if (detectedObjects.length > 0) {
+    for (let i = 0; i < detectedObjects.length; i++) {
+      const obj = detectedObjects[i];
+      const label = obj['label'];
+      const color = boundaryColor(label);
+      ctx.strokeStyle = color;
       const xmin = obj['xmin'];
       const ymin = obj['ymin'];
       const xmax = obj['xmax'];
       const ymax = obj['ymax'];
       ctx.strokeRect(xmin, ymin, xmax - xmin, ymax - ymin);
-      ctx.font="8px serif";
-      ctx.fillStyle="white";
-      ctx.fillText(obj['label'] + ': ' + obj['confidence'].toFixed(3), xmin, ymax);
+
+      // Now fill a rectangle at the top to put some text on.
+      ctx.fillStyle = color;
+      ctx.fillRect(xmin, ymin, xmax - xmin, 25);
+      ctx.fillStyle = textColor(label);
+      ctx.fillText(label + ': ' + obj['confidence'].toFixed(3), xmin + 5, ymin + 20);
     }
   }
 }
@@ -69,36 +116,19 @@ function detectedObjectsTable(detectedObjects, parent) {
 
 window.addEventListener('load', function () {
 
-  const main = document.querySelector('main');
+  const article = document.querySelector('article');
 
   function populateMain(jsonResult) {
 
-    // Remove the old errors
-    $('div.error').remove();
-
-    // Remove the old img
-    // TODO: using class if needed  $('img.imgClass').remove();
-    $('img').remove();
-
-    // Remove the old counts
-    $('h2').remove();
-
-    // Remove the old table
-    $('table').remove();
-
-    // Remove the old canvas
-    $('canvas').remove();
+    // Remove previous results
+    article.innerHTML = '';
 
     // Show the image if one was returned.
     if (jsonResult.hasOwnProperty("imageUrl")) {
 
-      // const myImg = document.createElement('img');
       const myImg = new Image();
       myImg.style.display = "none";
-      // myImg.className = 'imgClass';
       myImg.onload = function() {
-        console.log(myImg.height);
-        console.log(myImg.width);
         const myCanvas = document.createElement('canvas');
         const ctx = myCanvas.getContext('2d');
         ctx.canvas.height = myImg.height;
@@ -107,21 +137,21 @@ window.addEventListener('load', function () {
         if (jsonResult.hasOwnProperty("classified")) {
           drawBoundaryBoxes(jsonResult.classified, ctx);
         }
-        main.appendChild(myCanvas);
+        article.appendChild(myCanvas);
       };
       myImg.src = jsonResult.imageUrl;
-      main.appendChild(myImg);
+      article.appendChild(myImg);
     }
 
     if (jsonResult.hasOwnProperty("classified")) {
       let classified = jsonResult.classified;
 
-      // TODO: Count by label
-      const myCount = document.createElement('h2');
+      const myCount = document.createElement('h3');
       myCount.textContent = classified.length + " objects detected";
-      main.appendChild(myCount);
+      article.appendChild(myCount);
+      article.appendChild(document.createTextNode(countByLabel(classified)));
 
-      detectedObjectsTable(classified, main);
+      detectedObjectsTable(classified, article);
     }
     else {
       const myDiv = document.createElement('div');
@@ -130,7 +160,7 @@ window.addEventListener('load', function () {
       const myTitle = document.createElement('h3');
       myTitle.textContent = "ERROR";
       myDiv.appendChild(myTitle);
-      // Dump keys/values
+      // Dump keys/values to show error info
       for (const key in jsonResult) {
         if (jsonResult.hasOwnProperty(key)) {
           const myP = document.createElement('p');
@@ -138,7 +168,7 @@ window.addEventListener('load', function () {
           myDiv.appendChild(myP);
         }
       }
-      main.appendChild(myDiv);
+      article.appendChild(myDiv);
     }
   }
 

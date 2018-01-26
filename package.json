@@ -22,6 +22,7 @@
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore"
   },
   "dependencies": {
+    "dotenv": "^4.0.0",
     "express": "4.16.2",
     "formidable": "1.1.1",
     "metrics-tracker-client": "^0.2.3",
