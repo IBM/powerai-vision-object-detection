@@ -14,11 +14,14 @@
   },
   "homepage": "https://github.com/IBM/powerai-vision-object-detection#readme",
   "devDependencies": {
-    "eslint": "^3.19.0"
+    "eslint": "^4.16.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-plugin-node": "^5.2.1"
   },
   "scripts": {
     "start": "node app.js",
     "lint": "npm run lint:javascript",
+    "eslint": "eslint *.js js",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore"
   },
   "dependencies": {

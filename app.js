@@ -23,28 +23,28 @@ const request = require('request');
 require('metrics-tracker-client').track();
 
 require('dotenv').config({
-  silent: true
+  silent: true,
 });
 
 const app = express();
 const port = process.env.PORT || process.env.VCAP_APP_PORT || 8081;
-const powerai_vision_web_api_url = process.env.POWERAI_VISION_WEB_API_URL;
+const poweraiVisionWebApiUrl = process.env.POWERAI_VISION_WEB_API_URL;
 
-console.log("Web API URL: " + powerai_vision_web_api_url);
+console.log('Web API URL: ' + poweraiVisionWebApiUrl);
 
-if (!powerai_vision_web_api_url) {
-  throw new Error("Missing required environment variable POWERAI_VISION_WEB_API_URL");
+if (!poweraiVisionWebApiUrl) {
+  throw new Error(
+    'Missing required environment variable POWERAI_VISION_WEB_API_URL');
 }
 
 app.use(express.static(__dirname));
 
-app.post("/uploadpic", function (req, result) {
-
-  let res = req.pipe(request.post({
-    url: powerai_vision_web_api_url,
+app.post('/uploadpic', function(req, result) {
+  req.pipe(request.post({
+    url: poweraiVisionWebApiUrl,
     agentOptions: {
-      rejectUnauthorized: false
-    }}, function (err, resp, body) {
+      rejectUnauthorized: false,
+    }}, function(err, resp, body) {
     if (err) {
       console.log(err);
     }

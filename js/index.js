@@ -17,6 +17,14 @@
  * under the License.
  */
 
+/* eslint-env browser */
+
+/**
+ * Add detected object info as a row in the table.
+ * @param {Object} table
+ * @param {string} cellType
+ * @param {[]} values
+ */
 function addRow(table, cellType, values) {
   const row = document.createElement('tr');
   for (let i = 0; i < values.length; i++) {
@@ -29,6 +37,11 @@ function addRow(table, cellType, values) {
   table.appendChild(row);
 }
 
+/**
+ * Get the label text color to use given a label string.
+ * @param {string} label
+ * @return {string}
+ */
 function textColor(label) {
   switch (label) {
     case 'coca-cola': return 'white';
@@ -38,6 +51,11 @@ function textColor(label) {
   }
 }
 
+/**
+ * Get the boundary box color to use given a label string.
+ * @param {string} label
+ * @return {string}
+ */
 function boundaryColor(label) {
   switch (label) {
     case 'coca-cola': return 'red';
@@ -47,8 +65,12 @@ function boundaryColor(label) {
   }
 }
 
+/**
+ * Get a string describing how many objects or each type were detected.
+ * @param {[]} detectedObjects
+ * @return {string}
+ */
 function countByLabel(detectedObjects) {
-
   let countByLabel = {};
   if (detectedObjects.length > 0) {
     for (let i = 0; i < detectedObjects.length; i++) {
@@ -58,19 +80,23 @@ function countByLabel(detectedObjects) {
     }
   }
 
-  let ret_strings = [];
+  let retStrings = [];
   for (const key in countByLabel) {
     if (countByLabel.hasOwnProperty(key)) {
-      ret_strings.push(countByLabel[key] + ' ' + key);  // e.g. 1 coca-cola
+      retStrings.push(countByLabel[key] + ' ' + key); // e.g. 1 coca-cola
     }
   }
-  return ret_strings.join(', ');
+  return retStrings.join(', ');
 }
 
+/**
+ * Draw boundary boxes around the detected objects.
+ * @param {[]} detectedObjects
+ * @param {Object} ctx
+ */
 function drawBoundaryBoxes(detectedObjects, ctx) {
-
   ctx.lineWidth = 5;
-  ctx.font="24px serif";
+  ctx.font='24px serif';
 
   if (detectedObjects.length > 0) {
     for (let i = 0; i < detectedObjects.length; i++) {
@@ -88,14 +114,19 @@ function drawBoundaryBoxes(detectedObjects, ctx) {
       ctx.fillStyle = color;
       ctx.fillRect(xmin, ymin, xmax - xmin, 25);
       ctx.fillStyle = textColor(label);
-      ctx.fillText(label + ': ' + obj['confidence'].toFixed(3), xmin + 5, ymin + 20);
+      ctx.fillText(
+        label + ': ' + obj['confidence'].toFixed(3), xmin + 5, ymin + 20);
     }
   }
 }
 
+/**
+ * Create and populate a table to show the result details.
+ * @param {[]} detectedObjects
+ * @param {Object} parent
+ */
 function detectedObjectsTable(detectedObjects, parent) {
   if (detectedObjects.length > 0) {
-
     const table = document.createElement('table');
 
     addRow(table, 'th', ['Label', 'Conf', 'Min Pos', 'Max Pos']);
@@ -113,27 +144,28 @@ function detectedObjectsTable(detectedObjects, parent) {
   }
 }
 
-window.addEventListener('load', function () {
-
+window.addEventListener('load', function() {
   const article = document.querySelector('article');
 
-  function populateMain(jsonResult) {
-
+  /**
+   * Populate the article with formatted results.
+   * @param {Object} jsonResult
+   */
+  function populateArticle(jsonResult) {
     // Remove previous results
     article.innerHTML = '';
 
     // Show the image if one was returned.
-    if (jsonResult.hasOwnProperty("imageUrl")) {
-
+    if (jsonResult.hasOwnProperty('imageUrl')) {
       const myImg = new Image();
-      myImg.style.display = "none";
+      myImg.style.display = 'none';
       myImg.onload = function() {
         const myCanvas = document.createElement('canvas');
         const ctx = myCanvas.getContext('2d');
         ctx.canvas.height = myImg.height;
         ctx.canvas.width = myImg.width;
         ctx.drawImage(myImg, 0, 0, myImg.width, myImg.height);
-        if (jsonResult.hasOwnProperty("classified")) {
+        if (jsonResult.hasOwnProperty('classified')) {
           drawBoundaryBoxes(jsonResult.classified, ctx);
         }
         article.appendChild(myCanvas);
@@ -142,28 +174,27 @@ window.addEventListener('load', function () {
       article.appendChild(myImg);
     }
 
-    if (jsonResult.hasOwnProperty("classified")) {
+    if (jsonResult.hasOwnProperty('classified')) {
       let classified = jsonResult.classified;
 
       const myCount = document.createElement('h3');
-      myCount.textContent = classified.length + " objects detected";
+      myCount.textContent = classified.length + ' objects detected';
       article.appendChild(myCount);
       article.appendChild(document.createTextNode(countByLabel(classified)));
 
       detectedObjectsTable(classified, article);
-    }
-    else {
+    } else {
       const myDiv = document.createElement('div');
       myDiv.className = 'error';
       myDiv.id = 'error-div';
       const myTitle = document.createElement('h3');
-      myTitle.textContent = "ERROR";
+      myTitle.textContent = 'ERROR';
       myDiv.appendChild(myTitle);
       // Dump keys/values to show error info
       for (const key in jsonResult) {
         if (jsonResult.hasOwnProperty(key)) {
           const myP = document.createElement('p');
-          myP.textContent = key + ":  " + jsonResult[key];
+          myP.textContent = key + ':  ' + jsonResult[key];
           myDiv.appendChild(myP);
         }
       }
@@ -171,17 +202,15 @@ window.addEventListener('load', function () {
     }
   }
 
+  // When upload results are loaded (hidden), use them build the results.
   const raw = top.frames['mytarget'];
-
-  document.getElementById('mytarget').addEventListener('load', function(){
-
+  document.getElementById('mytarget').addEventListener('load', function() {
     let rawContent = raw.document.body.innerText;
     let rawJson = JSON.parse(rawContent);
     let rawJsonJson = JSON.parse(rawJson.data);
     console.log(rawJsonJson);
 
-    populateMain(rawJsonJson);
+    populateArticle(rawJsonJson);
   });
-
 });
 
