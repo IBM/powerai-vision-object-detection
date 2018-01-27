@@ -20,24 +20,34 @@
 const express = require('express');
 const request = require('request');
 
+require('metrics-tracker-client').track();
+
+require('dotenv').config({
+  silent: true
+});
+
 const app = express();
 const port = process.env.PORT || process.env.VCAP_APP_PORT || 8081;
+const powerai_vision_web_api_url = process.env.POWERAI_VISION_WEB_API_URL;
 
-require('metrics-tracker-client').track();
+console.log("Web API URL: " + powerai_vision_web_api_url);
+
+if (!powerai_vision_web_api_url) {
+  throw new Error("Missing required environment variable POWERAI_VISION_WEB_API_URL");
+}
 
 app.use(express.static(__dirname));
 
 app.post("/uploadpic", function (req, result) {
 
   let res = req.pipe(request.post({
-    url: 'https://ny1.ptopenlab.com/AIVision/api/dlapis/6f6d6787-0183-4a1b-be49-751b6ca16724',
+    url: powerai_vision_web_api_url,
     agentOptions: {
       rejectUnauthorized: false
     }}, function (err, resp, body) {
     if (err) {
       console.log(err);
     }
-    // console.log(resp);
     console.log(body);
     result.send({data: body});
   }));

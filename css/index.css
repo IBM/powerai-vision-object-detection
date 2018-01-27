@@ -65,9 +65,11 @@ header h1 {
     text-align: left;
     font-weight: bold;
 }
+
 article {
-    margin-top: 44px;
+    margin-top: 0;
 }
+
 img {
     padding: 0;
     display: block;
