@@ -29,7 +29,6 @@ function addRow(table, cellType, values) {
   table.appendChild(row);
 }
 
-// TODO: These should just be dicts
 function textColor(label) {
   switch (label) {
     case 'coca-cola': return 'white';
@@ -172,9 +171,9 @@ window.addEventListener('load', function () {
     }
   }
 
-  var raw = top.frames['mytarget'];
+  const raw = top.frames['mytarget'];
 
-  $('#mytarget').load(function(){
+  document.getElementById('mytarget').addEventListener('load', function(){
 
     let rawContent = raw.document.body.innerText;
     let rawJson = JSON.parse(rawContent);
