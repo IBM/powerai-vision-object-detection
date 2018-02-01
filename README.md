@@ -40,18 +40,10 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 ## Featured technologies
 * [Artificial Intelligence](https://medium.com/ibm-data-science-experience): Artificial intelligence can be applied to disparate solution spaces to deliver disruptive technologies.
-
-<!-- TODO: Depending on what demo app...
-* [Mobile](https://mobilefirstplatform.ibmcloud.com/): Systems of engagement are increasingly using mobile technology as the platform for delivery.
 * [Node.js](https://nodejs.org/): An open-source JavaScript run-time environment for executing server-side JavaScript code.
-* [Python](https://www.python.org/): Python is a programming language that lets you work more quickly and integrate your systems more effectively.
--->
 
-<!--Update this section when the video is created-->
-<!-- TODO:
 # Watch the Video
-[![](http://img.youtube.com/vi/Jxi7U7VOMYg/0.jpg)](https://www.youtube.com/watch?v=Jxi7U7VOMYg)
--->
+[![](http://img.youtube.com/vi/xoLcXQs4SP4/0.jpg)](https://www.youtube.com/watch?v=xoLcXQs4SP4)
 
 # Prerequisites
 
@@ -94,6 +86,7 @@ Use the ``Deploy to IBM Cloud`` button **OR** run locally.
 4. [Create tags and label objects](#4-create-tags-and-label-objects)
 5. [Create a DL task](#5-create-a-dl-task)
 6. [Deploy and test](#6-deploy-and-test)
+7. [Run the app](#7-run-the-app)
 
 ### 1. Clone the repo
 
@@ -187,10 +180,31 @@ To create a new dataset for object detection training:
   { "classified" : [ { "confidence" : 0.9986369013786316 , "ymax" : 578 , "label" : "coca-cola" , "xmax" : 755 , "xmin" : 588 , "ymin" : 29} , { "confidence" : 0.9954010248184204 , "ymax" : 592 , "label" : "coca-cola" , "xmax" : 601 , "xmin" : 437 , "ymin" : 10} , { "confidence" : 0.8161203265190125 , "ymax" : 567 , "label" : "coca-cola" , "xmax" : 426 , "xmin" : 259 , "ymin" : 17}] , "imageUrl" : "http://ny1.ptopenlab.com:443/AIVision/temp/5a26dd3b-d8ba-4e01-8b93-5a43f28e97c7.png" , "result" : "success"}
   ```
 
+### 7. Run the app
+
+An example web app demonstrates how to upload a picture, use the trained and deployed model, and display the detected objects by drawing bounding boxes and labels on the image. The functionality is similar to the above testing, but the code is provided for you to customize.
+
+* Copy the env.sample to .env. Edit the file to set the URL to point to the Web API that you deployed (above).
+
+* Assuming you have pre-installed [Node.js](https://nodejs.org/en/download/) and [npm](https://docs.npmjs.com/getting-started/installing-node), run the following commands:
+
+  ```
+  cd powerai-vision-object-detection
+  npm install
+  npm start
+  ```
+
+* Use a browser to go to the web UI. The default URL is http://localhost:8081.
+
+* Use the `Choose File` button to choose a file. On a phone this should give you an option to use your camera. On a laptop, you choose an image file (JPG or PNG).
+
+* Press the `Upload File` button to send the image to your Web API and render the results.
+
+  ![webui](doc/source/images/object_detection_app.png)
 
 # Links
 
-<!-- * [Demo on Youtube](https://www.youtube.com/watch?v=XXXXXXXXXXX) -->
+* [Demo on Youtube](https://www.youtube.com/watch?v=xoLcXQs4SP4): Watch the video
 * [Object Detection](https://en.wikipedia.org/wiki/Object_detection): Object detection on Wikipedia
 * [PowerAI Vision](https://developer.ibm.com/linuxonpower/deep-learning-powerai/technology-previews/powerai-vision/): Deep Learning and PowerAI Development
 * [TensorFlow Object Detection](https://research.googleblog.com/2017/06/supercharge-your-computer-vision-models.html): Supercharge your Computer Vision models with the TensorFlow Object Detection API
