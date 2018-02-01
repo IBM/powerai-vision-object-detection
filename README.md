@@ -130,9 +130,13 @@ To create a new dataset for object detection training:
 
 * Repeat this process for all tags and all images.
 
+  > Note: You can import `powerai-vision-object-detection/data/coke_bottles_exported.zip` which was already labeled and exported.
+
   ![add_dataset](doc/source/images/save_labels.png)
 
   > Tip: Use the `Only Show Unlabeled Files` pull-down to help you see when you are done.
+
+* You can use the `Data Augmentation` button to expand your dataset. Label the original images first and be sure to consider whether mirror images (horizontal or vertical) are appropriate for your use case. If you use data augmentation, a new expanded dataset will be created for you.
 
 * Click `Export As Zip File` to save a copy of your work. Now that you've spent some time labeling, this zip will let you start over without losing your work.
 
