@@ -6,7 +6,7 @@ google image search with a usage rights filter of
 
 Images which should not have passed that filter have been removed.
 If any additional images should not have passed that filter, please
-help us correct that by logging and issue or a pull request.
+help us correct that by logging an issue or a pull request.
 
 Some of the photos request proper attribution. We are happy
 to provide that here:
