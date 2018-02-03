@@ -114,7 +114,7 @@ To create a new dataset for object detection training:
 
   <img alt="add_dataset_name" src="doc/source/images/add_dataset_name.png" width="400">
 
-* Upload one or more images using drag-and-drop or `Select some`. You can use `powerai-vision-object-detection/data/coke_bottles.zip` from your cloned repo to upload many at once.
+* Upload one or more images using drag-and-drop or `Select some`. You can use [powerai-vision-object-detection/data/coke_bottles.zip](https://github.com/IBM/powerai-vision-object-detection/raw/master/data/coke_bottles.zip) from your cloned repo to upload many at once.
 
   ![update_dataset](doc/source/images/update_dataset.png)
 
@@ -130,7 +130,7 @@ To create a new dataset for object detection training:
 
 * Repeat this process for all tags and all images.
 
-  > Note: You can import `powerai-vision-object-detection/data/coke_bottles_exported.zip` which was already labeled and exported.
+  > Note: You can import [powerai-vision-object-detection/data/coke_bottles_exported.zip](https://github.com/IBM/powerai-vision-object-detection/raw/master/data/coke_bottles_exported.zip) which was already labeled and exported.
 
   ![add_dataset](doc/source/images/save_labels.png)
 
