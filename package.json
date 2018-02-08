@@ -20,6 +20,7 @@
     "eslint-plugin-node": "^5.2.1",
     "jsdom": "^11.6.2",
     "jsdom-global": "^3.0.2",
+    "mocha": "^5.0.0",
     "sinon": "^4.2.2",
     "sinon-test": "^2.1.3"
   },
