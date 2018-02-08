@@ -1,6 +1,7 @@
 module.exports = {
   "env": {
     "node": true,
+    "mocha": true,
   },
   "plugins": ["node"],
   "extends": [
@@ -10,5 +11,6 @@ module.exports = {
   ],
   "rules": {
     "no-console": 0,
+    "node/no-unpublished-require": ["error", {"allowModules": ["chai", "sinon", "jsdom-global"]}],
   }
 };

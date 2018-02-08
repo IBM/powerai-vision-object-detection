@@ -204,13 +204,17 @@ window.addEventListener('load', function() {
 
   // When upload results are loaded (hidden), use them build the results.
   const raw = top.frames['mytarget'];
-  document.getElementById('mytarget').addEventListener('load', function() {
-    let rawContent = raw.document.body.innerText;
-    let rawJson = JSON.parse(rawContent);
-    let rawJsonJson = JSON.parse(rawJson.data);
-    console.log(rawJsonJson);
+  const myTarget = document.getElementById('mytarget');
+  if (myTarget) { // optional for tests
+    myTarget.addEventListener('load', function() {
+      let rawContent = raw.document.body.innerText;
+      let rawJson = JSON.parse(rawContent);
+      let rawJsonJson = JSON.parse(rawJson.data);
+      console.log(rawJsonJson);
 
-    populateArticle(rawJsonJson);
-  });
+      populateArticle(rawJsonJson);
+    });
+  }
 });
 
+module.exports = {addRow, textColor}; // for testing

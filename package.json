@@ -14,20 +14,28 @@
   },
   "homepage": "https://github.com/IBM/powerai-vision-object-detection#readme",
   "devDependencies": {
+    "chai": "^4.1.2",
     "eslint": "^4.16.0",
     "eslint-config-google": "^0.9.1",
-    "eslint-plugin-node": "^5.2.1"
+    "eslint-plugin-node": "^5.2.1",
+    "istanbul": "^0.4.5",
+    "jsdom": "^11.6.2",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^5.0.0",
+    "sinon": "^4.2.2",
+    "sinon-test": "^2.1.3"
   },
   "scripts": {
     "start": "node app.js",
     "lint": "npm run lint:javascript",
-    "eslint": "eslint *.js js",
-    "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore"
+    "eslint": "eslint *.js js test",
+    "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
+    "test": "npm run unit && npm run eslint",
+    "unit": "istanbul cover _mocha -V test/unit -- -R spec"
   },
   "dependencies": {
     "dotenv": "^4.0.0",
     "express": "4.16.2",
-    "formidable": "1.1.1",
     "metrics-tracker-client": "^0.2.3",
     "request": "2.83.0"
   },

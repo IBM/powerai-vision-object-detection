@@ -1,0 +1,12 @@
+language: node_js
+dist: trusty
+sudo: required
+node_js: 6
+script:
+- npm run test
+cache:
+  directories:
+  - node_modules
+env:
+  global:
+  - POWERAI_VISION_WEB_API_URL=:/test/AIVision/api/dlapis/fake
