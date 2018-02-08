@@ -217,4 +217,7 @@ window.addEventListener('load', function() {
   }
 });
 
-module.exports = {addRow, textColor}; // for testing
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  module.exports = {addRow, textColor}; // for testing
+}
+
