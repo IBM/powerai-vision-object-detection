@@ -220,3 +220,4 @@ window.addEventListener('load', function() {
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
   module.exports = {addRow, textColor}; // for testing
 }
+
