@@ -20,8 +20,6 @@
 const express = require('express');
 const request = require('request');
 
-require('metrics-tracker-client').track();
-
 require('dotenv').config({
   silent: true,
 });
