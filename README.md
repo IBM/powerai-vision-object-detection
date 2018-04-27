@@ -49,7 +49,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 *This Code Pattern was built with the PowerAI Vision Technology Preview v3.0.*
 
-Go to [Try Power AI](https://developer.ibm.com/linuxonpower/deep-learning-powerai/try-powerai/) 
+Go to [Try Power AI](https://developer.ibm.com/linuxonpower/deep-learning-powerai/try-powerai/)
 and use `On Premise` to download an installer to deploy the preview on
 your Power Systems, or use `SuperVessel` and register for access to the
 SuperVessel cloud where you can try the preview.
@@ -60,9 +60,6 @@ SuperVessel cloud where you can try the preview.
 
 # Steps
 
-<!-- TODO: Update the repo and tracking id -->
-<!-- TODO: Will be used if we have an example app to deploy -->
-<!--
 Use the ``Deploy to IBM Cloud`` button **OR** run locally.
 
 ## Deploy to IBM Cloud

@@ -36,7 +36,6 @@
   "dependencies": {
     "dotenv": "^4.0.0",
     "express": "4.16.2",
-    "metrics-tracker-client": "^0.2.3",
     "request": "2.83.0"
   },
   "engines": {
