@@ -164,7 +164,7 @@ To create a new dataset for object detection training:
 
 An example web app demonstrates how to upload a picture, use the trained and deployed model, and display the detected objects by drawing bounding boxes and labels on the image. The functionality is similar to the above testing, but the code is provided for you to customize.
 
-Use the [Deploy to IBM Cloud](#deploy-to-ibm-cloud) button **OR** [run locally](#run-locally).
+Use the [Deploy to IBM Cloud](#deploy-to-ibm-cloud) button **OR** [Run locally](#run-locally).
 
 #### Deploy to IBM Cloud
 [![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/powerai-vision-object-detection)
