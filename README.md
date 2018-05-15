@@ -58,23 +58,6 @@ the preview on your own systems, register [here](https://www-01.ibm.com/marketin
 
 # Steps
 
-Use the ``Deploy to IBM Cloud`` button **OR** run locally.
-
-## Deploy to IBM Cloud
-[![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/powerai-vehicle-damage-analyzer)
-
-
-1. Press the above ``Deploy to IBM Cloud`` button and then click on ``Deploy``.
-
-2. In Toolchains, click on Delivery Pipeline to watch while the app is deployed. Once deployed, the app can be viewed by clicking 'View app'.
-
-3. Use the IBM Cloud dashboard to manage the app. The app is named `powerai-vehicle-damage-analyzer` with a unique suffix.
-
-## Run locally
-
-> NOTE: These steps are only needed when running locally instead of using the ``Deploy to IBM Cloud`` button.
--->
-
 1. [Clone the repo](#1-clone-the-repo)
 2. [Login to PowerAI Vision](#2-login-to-powerai-vision)
 3. [Create a dataset](#3-create-a-dataset)
@@ -114,8 +97,6 @@ To create a new dataset for object detection training:
   ![update_dataset](doc/source/images/update_dataset.png)
 
   > Note: If you are using your own zip file and do not see file thumbnails after the upload, then the upload failed. Use lowercase file names without special characters or spaces. You can also upload individual files or multi-select several at a time to determine which file caused the upload to fail.
-
-<!-- TODO: set1, set2 (for better results...), testset -->
 
 ### 4. Create tags and label objects
 
@@ -183,7 +164,34 @@ To create a new dataset for object detection training:
 
 An example web app demonstrates how to upload a picture, use the trained and deployed model, and display the detected objects by drawing bounding boxes and labels on the image. The functionality is similar to the above testing, but the code is provided for you to customize.
 
-* Copy the env.sample to .env. Edit the file to set the URL to point to the Web API that you deployed (above).
+Use the [Deploy to IBM Cloud](#deploy-to-ibm-cloud) button **OR** [run locally](#run-locally).
+
+#### Deploy to IBM Cloud
+[![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/powerai-vision-object-detection)
+
+
+1. Press the above ``Deploy to IBM Cloud`` button and then click on ``Deploy``.
+
+1. In Toolchains, click on Delivery Pipeline to watch while the app is deployed. Once deployed, the app can be viewed by clicking 'View app'.
+
+1. Use the IBM Cloud dashboard to manage the app. The app is named `powerai-vision-object-detection` with a unique suffix.
+
+1. Add your PowerAI Vision API endpoint:
+   * Click on the app in the IBM Cloud dashboard.
+   * Select `Runtime` in the sidebar.
+   * Hit `Environment variables` in the middle button bar.
+   * Hit the `Add` button.
+   * Add the name `POWERAI_VISION_WEB_API_URL` and set the value to the web API that you deployed (above).
+   * Hit the `Save` button. The app will restart automatically.
+   * Click on `Visit App URL` to use the app.
+
+#### Run locally
+
+Use your cloned repo to build and run the web app.
+
+> NOTE: These steps are only needed when running locally instead of using the ``Deploy to IBM Cloud`` button.
+
+* Copy the env.sample to .env. Edit the file to set the URL to point to the web API that you deployed (above).
 
 * Assuming you have pre-installed [Node.js](https://nodejs.org/en/download/) and [npm](https://docs.npmjs.com/getting-started/installing-node), run the following commands:
 
@@ -195,11 +203,15 @@ An example web app demonstrates how to upload a picture, use the trained and dep
 
 * Use a browser to go to the web UI. The default URL is http://localhost:8081.
 
+#### Use the web app
+
 * Use the `Choose File` button to choose a file. On a phone this should give you an option to use your camera. On a laptop, you choose an image file (JPG or PNG).
 
-* Press the `Upload File` button to send the image to your Web API and render the results.
+* Press the `Upload File` button to send the image to your web API and render the results.
 
   ![webui](doc/source/images/object_detection_app.png)
+
+* The UI will show an error message, if you did not configure your POWERAI_VISION_WEB_API_URL or if your API is not deployed (in SuperVessel you can quickly redeploy every hour).
 
 # Links
 

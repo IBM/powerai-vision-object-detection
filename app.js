@@ -19,6 +19,7 @@
 
 const express = require('express');
 const request = require('request');
+const MISSING_ENV = 'Missing required runtime environment variable POWERAI_VISION_WEB_API_URL';
 
 require('dotenv').config({
   silent: true,
@@ -31,24 +32,31 @@ const poweraiVisionWebApiUrl = process.env.POWERAI_VISION_WEB_API_URL;
 console.log('Web API URL: ' + poweraiVisionWebApiUrl);
 
 if (!poweraiVisionWebApiUrl) {
-  throw new Error(
-    'Missing required environment variable POWERAI_VISION_WEB_API_URL');
+  console.log(MISSING_ENV);
 }
 
 app.use(express.static(__dirname));
 
 app.post('/uploadpic', function(req, result) {
-  req.pipe(request.post({
-    url: poweraiVisionWebApiUrl,
-    agentOptions: {
-      rejectUnauthorized: false,
-    }}, function(err, resp, body) {
-    if (err) {
-      console.log(err);
-    }
-    console.log(body);
-    result.send({data: body});
-  }));
+
+  if (!poweraiVisionWebApiUrl) {
+    console.log(MISSING_ENV);
+    result.send({data: JSON.stringify({error: MISSING_ENV})});
+  }
+  else {
+    req.pipe(request.post({
+      url: poweraiVisionWebApiUrl,
+      agentOptions: {
+        rejectUnauthorized: false,
+      }}, function(err, resp, body) {
+      if (err) {
+        console.log(err);
+      }
+      console.log(body);
+      result.send({data: body});
+    }));
+  }
+
 });
 
 app.listen(port, () => {
