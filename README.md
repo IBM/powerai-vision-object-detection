@@ -49,14 +49,12 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 *This Code Pattern was built with the PowerAI Vision Technology Preview v3.0.*
 
-Go to [Try Power AI](https://developer.ibm.com/linuxonpower/deep-learning-powerai/try-powerai/)
-and use `On Premise` to download an installer to deploy the preview on
-your Power Systems, or use `SuperVessel` and register for access to the
-SuperVessel cloud where you can try the preview.
+* To try the preview using the `SuperVessel` cloud, register [here](https://crl.ptopenlab.com:8800/keycloak/auth/realms/aivision/login-actions/registration?client_id=vision-service-us&tab_id=VoInlOJzb6w).
 
-![](doc/source/images/try-powerai.png)
+* If you have Power Systems and want to download an installer to deploy
+the preview on your own systems, register [here](https://www-01.ibm.com/marketing/iwm/iwm/web/preLogin.do?source=mrs-eibmpair).
 
-> NOTE: The steps and examples in this README assume you are using SuperVessel.
+> NOTE: The steps and examples in this README assume you are using SuperVessel. For example, some URLs use ny1.ptopenlab.com.
 
 # Steps
 
