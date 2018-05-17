@@ -49,7 +49,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 *This Code Pattern was built with the PowerAI Vision Technology Preview v3.0.*
 
-* To try the preview using the `SuperVessel` cloud, register [here](https://crl.ptopenlab.com:8800/keycloak/auth/realms/aivision/login-actions/registration?client_id=vision-service-us&tab_id=VoInlOJzb6w).
+* To try the preview using the `SuperVessel` cloud, login or register [here](https://ny1.ptopenlab.com/AIVision).
 
 * If you have Power Systems and want to download an installer to deploy
 the preview on your own systems, register [here](https://www-01.ibm.com/marketing/iwm/iwm/web/preLogin.do?source=mrs-eibmpair).
