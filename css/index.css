@@ -42,6 +42,7 @@ main {
     height: 75%;
     font-family: sans-serif;
     text-align: left;
+    flex-direction:  column;
 }
 header {
     overflow: hidden;
@@ -68,6 +69,8 @@ header h1 {
 
 article {
     margin-top: 0;
+    display: flex;
+    flex-flow: column wrap;
 }
 
 img {
@@ -79,23 +82,28 @@ img {
 canvas {
     padding: 0;
     display: block;
-    max-height: 100%;
-    max-width: 100%;
     float: left;
+    flex-direction: column;
+    overflow: scroll;
+    object-fit: contain;
+    object-position: top left;
+    max-width: 100%;
 }
 table {
     border-collapse: collapse;
     border-spacing: 0;
     float: left;
-    /* width: 100%; */
+    max-width: 700px;
     border: 1px solid #ddd;
     margin-right: 20px;
     margin-bottom: 20px;
+    table-layout: fixed;
 }
 
 th, td {
     text-align: left;
     padding: 8px;
+    width: 100%;
 }
 
 tr:nth-child(even){background-color: #f2f2f2}
