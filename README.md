@@ -1,3 +1,5 @@
+*Read this in other languages: [日本語](README-ja.md).*
+
 # Object detection with PowerAI Vision
 
 In this Code Pattern, we will use PowerAI Vision Object Detection
