@@ -30,18 +30,20 @@ When the reader has completed this Code Pattern, they will understand how to:
 ![architecture](doc/source/images/architecture.png)
 
 ## Flow
+
 1. User uploads images to create a PowerAI Vision dataset
 1. User labels objects in the image dataset prior to training
 1. The model is trained, deployed and tested in PowerAI Vision
 1. User can detect objects in images using a REST client
 
 ## Included components
-* [IBM Power Systems](https://www-03.ibm.com/systems/power/): A server built with open technologies and designed for mission-critical applications.
-* [IBM PowerAI](https://www.ibm.com/ms-en/marketplace/deep-learning-platform): A software platform that makes deep learning, machine learning, and AI more accessible and better performing.
-* [IBM PowerAI Vision Technology Preview](https://developer.ibm.com/linuxonpower/deep-learning-powerai/technology-previews/powerai-vision/): A complete ecosystem for labeling datasets, training, and deploying deep learning models for computer vision.
+
+* [IBM Power Systems](https://www.ibm.com/it-infrastructure/power): A server built with open technologies and designed for mission-critical applications.
+* [IBM PowerAI](https://www.ibm.com/us-en/marketplace/deep-learning-platform): A software platform that makes deep learning, machine learning, and AI more accessible and better performing.
+* [IBM PowerAI Technology Preview](https://developer.ibm.com/linuxonpower/deep-learning-powerai/technology-previews/powerai-vision/): A complete ecosystem for labeling datasets, training, and deploying deep learning models for computer vision.
 
 ## Featured technologies
-* [Artificial Intelligence](https://medium.com/ibm-data-science-experience): Artificial intelligence can be applied to disparate solution spaces to deliver disruptive technologies.
+* [Artificial Intelligence](https://developer.ibm.com/technologies/artificial-intelligence/): Create apps that accelerate, enhance, and scale the human expertise.
 * [Node.js](https://nodejs.org/): An open-source JavaScript run-time environment for executing server-side JavaScript code.
 
 # Watch the Video
@@ -56,7 +58,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 * If you have Power Systems and want to download an installer to deploy
 the preview on your own systems, register [here](https://www-01.ibm.com/marketing/iwm/iwm/web/preLogin.do?source=mrs-eibmpair).
 
-> NOTE: The steps and examples in this README assume you are using SuperVessel. For example, some URLs use ny1.ptopenlab.com.
+> NOTE: The steps and examples in this README assume you are using SuperVessel. For example, some URLs use `ny1.ptopenlab.com`.
 
 # Steps
 
@@ -171,10 +173,9 @@ Use the [Deploy to IBM Cloud](#deploy-to-ibm-cloud) button **OR** [Run locally](
 #### Deploy to IBM Cloud
 [![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/powerai-vision-object-detection)
 
+1. Press the above `Deploy to IBM Cloud` button, click `Create+` to create an *IBM Cloud API Key* and then click on `Deploy`.
 
-1. Press the above ``Deploy to IBM Cloud`` button and then click on ``Deploy``.
-
-1. In Toolchains, click on Delivery Pipeline to watch while the app is deployed. Once deployed, the app can be viewed by clicking 'View app'.
+1. In Toolchains, click on Delivery Pipeline to watch while the app is deployed.
 
 1. Use the IBM Cloud dashboard to manage the app. The app is named `powerai-vision-object-detection` with a unique suffix.
 
@@ -197,7 +198,7 @@ Use your cloned repo to build and run the web app.
 
 * Assuming you have pre-installed [Node.js](https://nodejs.org/en/download/) and [npm](https://docs.npmjs.com/getting-started/installing-node), run the following commands:
 
-  ```
+  ```bash
   cd powerai-vision-object-detection
   npm install
   npm start
