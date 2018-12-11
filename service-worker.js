@@ -20,9 +20,9 @@
 /* global self, caches */
 'use strict';
 
-let CACHE_NAME = 'powerai-vision-object-detection';
+const CACHE_NAME = 'powerai-vision-object-detection';
 
-let urlstocache = [
+const urlstocache = [
   'css/index.css',
   'js/index.js',
 ];
@@ -30,11 +30,11 @@ let urlstocache = [
 // install/cache page assets
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function(cache) {
-        console.log('cache opened');
-        return cache.addAll(urlstocache);
-      })
+      caches.open(CACHE_NAME)
+          .then(function(cache) {
+            console.log('cache opened');
+            return cache.addAll(urlstocache);
+          })
   );
 });
 
@@ -43,15 +43,15 @@ self.addEventListener('install', function(event) {
 self.addEventListener('activate', function(event) {
   console.log('worker activated');
   event.waitUntil(
-    caches.keys().then(function(keys) {
-      return Promise.all(
-        keys.filter(function(key) {
-          // filter old versioned keys
-          return key !== CACHE_NAME;
-        }).map(function(key) {
-          return caches.delete(key);
-        })
-      );
-    })
+      caches.keys().then(function(keys) {
+        return Promise.all(
+            keys.filter(function(key) {
+              // filter old versioned keys
+              return key !== CACHE_NAME;
+            }).map(function(key) {
+              return caches.delete(key);
+            })
+        );
+      })
   );
 });

@@ -71,7 +71,7 @@ function boundaryColor(label) {
  * @return {string}
  */
 function countByLabel(detectedObjects) {
-  let countByLabel = {};
+  const countByLabel = {};
   if (detectedObjects.length > 0) {
     for (let i = 0; i < detectedObjects.length; i++) {
       const obj = detectedObjects[i];
@@ -80,7 +80,7 @@ function countByLabel(detectedObjects) {
     }
   }
 
-  let retStrings = [];
+  const retStrings = [];
   for (const key in countByLabel) {
     if (countByLabel.hasOwnProperty(key)) {
       retStrings.push(countByLabel[key] + ' ' + key); // e.g. 1 coca-cola
@@ -115,7 +115,7 @@ function drawBoundaryBoxes(detectedObjects, ctx) {
       ctx.fillRect(xmin, ymin, xmax - xmin, 25);
       ctx.fillStyle = textColor(label);
       ctx.fillText(
-        label + ': ' + obj['confidence'].toFixed(3), xmin + 5, ymin + 20);
+          label + ': ' + obj['confidence'].toFixed(3), xmin + 5, ymin + 20);
     }
   }
 }
@@ -175,7 +175,7 @@ window.addEventListener('load', function() {
     }
 
     if (jsonResult.hasOwnProperty('classified')) {
-      let classified = jsonResult.classified;
+      const classified = jsonResult.classified;
 
       const myCount = document.createElement('h3');
       myCount.textContent = classified.length + ' objects detected';
@@ -207,9 +207,9 @@ window.addEventListener('load', function() {
   const myTarget = document.getElementById('mytarget');
   if (myTarget) { // optional for tests
     myTarget.addEventListener('load', function() {
-      let rawContent = raw.document.body.innerText;
-      let rawJson = JSON.parse(rawContent);
-      let rawJsonJson = JSON.parse(rawJson.data);
+      const rawContent = raw.document.body.innerText;
+      const rawJson = JSON.parse(rawContent);
+      const rawJsonJson = JSON.parse(rawJson.data);
       console.log(rawJsonJson);
 
       populateArticle(rawJsonJson);
