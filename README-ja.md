@@ -176,7 +176,7 @@ PowerAI Vision Object Detection は、ユーザーと開発者がカスタマイ
 <a name="deploy-to-ibm-cloud"></a>
 #### IBM Cloud にデプロイする
 
-[![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/powerai-vision-object-detection)
+[![Deploy to IBM Cloud](https://cloud.ibm.com/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/IBM/powerai-vision-object-detection)
 
 1. 上記の ``Deploy to IBM Cloud`` ボタンを押し、次に ``Deploy`` をクリックします。
 
