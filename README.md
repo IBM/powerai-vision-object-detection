@@ -67,7 +67,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 * [Node.js](https://nodejs.org/): An open-source JavaScript run-time environment for executing server-side JavaScript code.
 
 # Watch the Video
-[![](http://img.youtube.com/vi/xoLcXQs4SP4/0.jpg)](https://www.youtube.com/watch?v=xoLcXQs4SP4)
+[![](https://img.youtube.com/vi/xoLcXQs4SP4/0.jpg)](https://www.youtube.com/watch?v=xoLcXQs4SP4)
 
 # Prerequisites
 
@@ -76,7 +76,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 * To try the preview using the `SuperVessel` cloud, login or register [here](https://ny1.ptopenlab.com/AIVision).
 
 * If you have Power Systems and want to download an installer to deploy
-the preview on your own systems, register [here](https://www-01.ibm.com/marketing/iwm/iwm/web/preLogin.do?source=mrs-eibmpair).
+the preview on your own systems, register [here](https://www.ibm.com/account/reg/signup?formid=urx-19776&target=https://www-01.ibm.com/marketing/iwm/iwm/web/pickUrxNew.do?source=mrs-eibmpair).
 
 > NOTE: The steps and examples in this README assume you are using SuperVessel. For example, some URLs use `ny1.ptopenlab.com`.
 
@@ -191,7 +191,7 @@ An example web app demonstrates how to upload a picture, use the trained and dep
 Use the [Deploy to IBM Cloud](#deploy-to-ibm-cloud) button **OR** [Run locally](#run-locally).
 
 #### Deploy to IBM Cloud
-[![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/powerai-vision-object-detection)
+[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/IBM/powerai-vision-object-detection)
 
 1. Press the above `Deploy to IBM Cloud` button, click `Create+` to create an *IBM Cloud API Key* and then click on `Deploy`.
 
@@ -241,7 +241,7 @@ Use your cloned repo to build and run the web app.
 * [Demo on Youtube](https://www.youtube.com/watch?v=xoLcXQs4SP4): Watch the video
 * [Object Detection](https://en.wikipedia.org/wiki/Object_detection): Object detection on Wikipedia
 * [PowerAI Vision](https://developer.ibm.com/linuxonpower/deep-learning-powerai/technology-previews/powerai-vision/): Deep Learning and PowerAI Development
-* [TensorFlow Object Detection](https://research.googleblog.com/2017/06/supercharge-your-computer-vision-models.html): Supercharge your Computer Vision models with the TensorFlow Object Detection API
+* [TensorFlow Object Detection](https://ai.googleblog.com/2017/06/supercharge-your-computer-vision-models.html): Supercharge your Computer Vision models with the TensorFlow Object Detection API
 * [AI Article](https://www.entrepreneur.com/article/283990): Can Artificial Intelligence Identify Pictures Better than Humans?
 * [From the developers](https://developer.ibm.com/linuxonpower/2017/08/30/ibm-powerai-vision-speeds-transfer-learning-greater-accuracy-real-world-example/): IBM PowerAI Vision speeds transfer learning with greater accuracy -- a real world example
 
