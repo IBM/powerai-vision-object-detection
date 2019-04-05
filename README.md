@@ -1,23 +1,3 @@
-> :exclamation: SuperVessel upgrade is coming :exclamation:
->
->Start Date:  9-Jan-2019 8:00 am EST
->
->End Date:    18-Jan-2019 8:00 am EST (**All data will be deleted**)
->
->
->The hardware and software in NY site will be updated to the latest version, **all users' dataset will be CLEANED.**
->
->**Please back up important data immediately, all data will be permanently deleted after January 18th.** 
->
->If you have any problems after this time frame with regard to connectivity, or if you have any questions regarding the >maintenance at any point, please mail to help@ptopenlab.com .
->
->We appreciate your patience during this work and welcome any feedback.
->
->
->Thank you.
->
-
-
 *Read this in other languages: [日本語](README-ja.md).*
 
 # Object detection with PowerAI Vision
@@ -71,14 +51,11 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 # Prerequisites
 
-*This Code Pattern was built with the PowerAI Vision Technology Preview v3.0.*
+This Code Pattern requires PowerAI Vision.
+Go [here](https://developer.ibm.com/linuxonpower/deep-learning-powerai/vision/)
+to learn more about trial access (when available).
 
-* To try the preview using the `SuperVessel` cloud, login or register [here](https://ny1.ptopenlab.com/AIVision).
-
-* If you have Power Systems and want to download an installer to deploy
-the preview on your own systems, register [here](https://www.ibm.com/account/reg/signup?formid=urx-19776&target=https://www-01.ibm.com/marketing/iwm/iwm/web/pickUrxNew.do?source=mrs-eibmpair).
-
-> NOTE: The steps and examples in this README assume you are using SuperVessel. For example, some URLs use `ny1.ptopenlab.com`.
+*This Code Pattern was built with the PowerAI Vision Technology Preview v3.0. The app has now been tested with PowerAI Vision 1.1.3, but the UI screenshots and instructions have not yet been updated.*
 
 # Steps
 
@@ -100,7 +77,7 @@ git clone https://github.com/IBM/powerai-vision-object-detection
 
 ### 2. Login to PowerAI Vision
 
-If you are using SuperVessel, login here: https://ny1.ptopenlab.com/AIVision/index.html
+Use your browser to access the PowerAI Vision web UI for steps 3-6.
 
 ### 3. Create a dataset
 
@@ -161,6 +138,8 @@ To create a new dataset for object detection training:
 * Test your model in the PowerAI Vision UI. Use `Select some` to choose a test image. The result shows you how many objects were detected and the image is shown with bounding boxes, labels and confidence scores.
 
   ![test_ui](doc/source/images/test_ui.png)
+
+* Copy the API endpoint from your deployed model. Use this to test with `curl` (below) and to set the `POWERAI_VISION_WEB_API_URL` for the web app (in step 7).
 
 * From a command-line, you can test your deployed REST endpoint using an image file and the `curl` command. Notice the output JSON shows multiple bottles were detected and provides the confidence, label and location for each of them.
   > Warning: this example used `--insecure` for convenience.
