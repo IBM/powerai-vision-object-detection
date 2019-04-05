@@ -167,14 +167,6 @@ window.addEventListener('load', function() {
     };
     reader.readAsDataURL(fileInput.files[0]);
 
-    /* FYI: The old way to set myImg.src ...
-     * We used to use the imageUrl instead of FileReader(),
-     * but apparently the URL is not always reachable.
-    if (jsonResult.hasOwnProperty('imageUrl')) {
-      myImg.src = jsonResult.imageUrl;
-    }
-    */
-
     myImg.style.display = 'none';
     myImg.onload = function() {
       const myCanvas = document.createElement('canvas');
