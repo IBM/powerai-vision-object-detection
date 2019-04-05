@@ -155,24 +155,39 @@ window.addEventListener('load', function() {
     // Remove previous results
     article.innerHTML = '';
 
-    // Show the image if one was returned.
-    if (jsonResult.hasOwnProperty('imageUrl')) {
-      const myImg = new Image();
-      myImg.style.display = 'none';
-      myImg.onload = function() {
-        const myCanvas = document.createElement('canvas');
-        const ctx = myCanvas.getContext('2d');
-        ctx.canvas.height = myImg.height;
-        ctx.canvas.width = myImg.width;
-        ctx.drawImage(myImg, 0, 0, myImg.width, myImg.height);
-        if (jsonResult.hasOwnProperty('classified')) {
-          drawBoundaryBoxes(jsonResult.classified, ctx);
-        }
-        article.appendChild(myCanvas);
-      };
-      myImg.src = jsonResult.imageUrl;
+    // Display the image
+    const myImg = new Image();
+
+    // Read the image file from the input selector for display.
+    const fileInput = document.getElementById('fileinput');
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      myImg.src = e.target.result;
       article.appendChild(myImg);
+    };
+    reader.readAsDataURL(fileInput.files[0]);
+
+    /* FYI: The old way to set myImg.src ...
+     * We used to use the imageUrl instead of FileReader(),
+     * but apparently the URL is not always reachable.
+    if (jsonResult.hasOwnProperty('imageUrl')) {
+      myImg.src = jsonResult.imageUrl;
     }
+    */
+
+    myImg.style.display = 'none';
+    myImg.onload = function() {
+      const myCanvas = document.createElement('canvas');
+      const ctx = myCanvas.getContext('2d');
+      ctx.canvas.height = myImg.height;
+      ctx.canvas.width = myImg.width;
+      ctx.drawImage(myImg, 0, 0, myImg.width, myImg.height);
+      if (jsonResult.hasOwnProperty('classified')) {
+        drawBoundaryBoxes(jsonResult.classified, ctx);
+      }
+      article.appendChild(myCanvas);
+    };
+    article.appendChild(myImg);
 
     if (jsonResult.hasOwnProperty('classified')) {
       const classified = jsonResult.classified;
