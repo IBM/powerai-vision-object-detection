@@ -203,7 +203,7 @@ Use your cloned repo to build and run the web app.
   npm start
   ```
 
-* Use a browser to go to the web UI. The default URL is http://localhost:8081.
+* Use a browser to go to the web UI. The default URL is `http://localhost:8081`.
 
 #### Use the web app
 

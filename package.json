@@ -15,30 +15,43 @@
   "homepage": "https://github.com/IBM/powerai-vision-object-detection#readme",
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^5.10.0",
-    "eslint-config-google": "^0.11.0",
-    "eslint-plugin-node": "^8.0.0",
+    "eslint": "^6.1.0",
+    "eslint-config-google": "^0.13.0",
+    "eslint-plugin-node": "^9.1.0",
     "istanbul": "^0.4.5",
-    "jsdom": "^13.0.0",
+    "jsdom": "^15.1.1",
     "jsdom-global": "^3.0.2",
-    "mocha": "^5.2.0",
-    "sinon": "^7.2.0",
+    "mocha": "^6.2.0",
+    "remark-cli": "^7.0.0",
+    "remark-lint": "^6.0.5",
+    "remark-lint-no-dead-urls": "^0.5.0",
+    "remark-validate-links": "^9.0.1",
+    "sinon": "^7.4.1",
     "sinon-test": "^2.4.0"
   },
   "scripts": {
     "start": "node app.js",
+    "lint-md": "./node_modules/.bin/remark -f --ignore-pattern *ja.md .",
     "lint": "npm run lint:javascript",
     "eslint": "eslint *.js js test",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
-    "test": "npm run unit && npm run eslint",
+    "test": "npm run lint-md && npm run unit && npm run eslint",
     "unit": "istanbul cover _mocha -V test/unit -- -R spec"
   },
+  "remarkConfig": {
+    "plugins": [
+      "remark-validate-links",
+      "remark-lint-no-dead-urls"
+    ]
+  },
   "dependencies": {
-    "dotenv": "^6.2.0",
-    "express": "^4.16.4",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "handlebars": "^4.1.2",
+    "js-yaml": "^3.13.1",
     "request": "^2.88.0"
   },
   "engines": {
-    "node": "8.x"
+    "node": ">=8.0.0"
   }
 }
