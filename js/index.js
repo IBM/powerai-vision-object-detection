@@ -82,7 +82,7 @@ function countByLabel(detectedObjects) {
 
   const retStrings = [];
   for (const key in countByLabel) {
-    if (countByLabel.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(countByLabel, key)) {
       retStrings.push(countByLabel[key] + ' ' + key); // e.g. 1 coca-cola
     }
   }
@@ -174,14 +174,14 @@ window.addEventListener('load', function() {
       ctx.canvas.height = myImg.height;
       ctx.canvas.width = myImg.width;
       ctx.drawImage(myImg, 0, 0, myImg.width, myImg.height);
-      if (jsonResult.hasOwnProperty('classified')) {
+      if (Object.prototype.hasOwnProperty.call(jsonResult, 'classified')) {
         drawBoundaryBoxes(jsonResult.classified, ctx);
       }
       article.appendChild(myCanvas);
     };
     article.appendChild(myImg);
 
-    if (jsonResult.hasOwnProperty('classified')) {
+    if (Object.prototype.hasOwnProperty.call(jsonResult, 'classified')) {
       const classified = jsonResult.classified;
 
       const myCount = document.createElement('h3');
@@ -199,7 +199,7 @@ window.addEventListener('load', function() {
       myDiv.appendChild(myTitle);
       // Dump keys/values to show error info
       for (const key in jsonResult) {
-        if (jsonResult.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(jsonResult, key)) {
           const myP = document.createElement('p');
           myP.textContent = key + ':  ' + jsonResult[key];
           myDiv.appendChild(myP);
