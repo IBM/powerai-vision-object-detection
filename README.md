@@ -1,14 +1,12 @@
-*Read this in other languages: [日本語](README-ja.md).*
-
 # Object detection with PowerAI Vision
 
-In this Code Pattern, we will use PowerAI Vision Object Detection
+In this code pattern, we will use PowerAI Vision Object Detection
 to detect and label objects, within an image, based on customized
 training.
 
-> This example can easily be customized with your own datasets.
+> Note: This example can easily be customized with your own data sets.
 
-An example dataset has been provided with images of Coca-Cola bottles.
+An example data set has been provided with images of Coca-Cola bottles.
 Once we train and deploy a model, we'll have a REST endpoint
 that allows us locate and count Coke bottles in an image.
 
@@ -21,49 +19,41 @@ PowerAI Vision presents REST APIs for inference operations.
 Object detection with your custom model can be used from any REST
 client and can also be tested in the PowerAI Vision UI.
 
-When the reader has completed this Code Pattern, they will understand how to:
+When the reader has completed this code pattern, they will understand how to:
 
-* Create a dataset for object detection with PowerAI Vision
-* Train and deploy a model based on the dataset
+* Create a data set for object detection with PowerAI Vision
+* Train and deploy a model based on the data set
 * Test the model via REST calls
 
 ![architecture](doc/source/images/architecture.png)
 
 ## Flow
 
-1. User uploads images to create a PowerAI Vision dataset
-1. User labels objects in the image dataset prior to training
+1. User uploads images to create a PowerAI Vision data set
+1. User labels objects in the image data set prior to training
 1. The model is trained, deployed and tested in PowerAI Vision
 1. User can detect objects in images using a REST client
 
-## Included components
+## Watch the Video
 
-* [IBM Power Systems](https://www.ibm.com/it-infrastructure/power): A server built with open technologies and designed for mission-critical applications.
-* [IBM PowerAI](https://www.ibm.com/us-en/marketplace/deep-learning-platform): A software platform that makes deep learning, machine learning, and AI more accessible and better performing.
-* [IBM PowerAI Technology Preview](https://developer.ibm.com/linuxonpower/deep-learning-powerai/technology-previews/powerai-vision/): A complete ecosystem for labeling datasets, training, and deploying deep learning models for computer vision.
+[![video](https://img.youtube.com/vi/xoLcXQs4SP4/0.jpg)](https://www.youtube.com/watch?v=xoLcXQs4SP4)
 
-## Featured technologies
-* [Artificial Intelligence](https://developer.ibm.com/technologies/artificial-intelligence/): Create apps that accelerate, enhance, and scale the human expertise.
-* [Node.js](https://nodejs.org/): An open-source JavaScript run-time environment for executing server-side JavaScript code.
+## Prerequisites
 
-# Watch the Video
-[![](https://img.youtube.com/vi/xoLcXQs4SP4/0.jpg)](https://www.youtube.com/watch?v=xoLcXQs4SP4)
+This code pattern requires PowerAI Vision.
+Go [here](https://developer.ibm.com/linuxonpower/deep-learning-powerai/try-powerai/)
+to learn more about trial access (when available)
+and try PowerAI Vision in the cloud or download a PowerAI Vision trial to install on your own Power Systems.
 
-# Prerequisites
+*This code pattern was built with the PowerAI Vision Technology Preview v3.0. The app has now been tested with PowerAI Vision 1.1.3, but the UI screenshots and instructions have not yet been updated.*
 
-This Code Pattern requires PowerAI Vision.
-Go [here](https://developer.ibm.com/linuxonpower/deep-learning-powerai/vision/)
-to learn more about trial access (when available).
-
-*This Code Pattern was built with the PowerAI Vision Technology Preview v3.0. The app has now been tested with PowerAI Vision 1.1.3, but the UI screenshots and instructions have not yet been updated.*
-
-# Steps
+## Steps
 
 1. [Clone the repo](#1-clone-the-repo)
 2. [Login to PowerAI Vision](#2-login-to-powerai-vision)
-3. [Create a dataset](#3-create-a-dataset)
-4. [Create tags and label objects](#4-create-tags-and-label-objects)
-5. [Create a DL task](#5-create-a-dl-task)
+3. [Create a data set](#3-create-a-data-set)
+4. [Label the objects](#4-label-the-objects)
+5. [Train the model](#5-train-the-model)
 6. [Deploy and test](#6-deploy-and-test)
 7. [Run the app](#7-run-the-app)
 
@@ -71,7 +61,7 @@ to learn more about trial access (when available).
 
 Clone the `powerai-vision-object-detection` locally. In a terminal, run:
 
-```
+```bash
 git clone https://github.com/IBM/powerai-vision-object-detection
 ```
 
@@ -79,88 +69,97 @@ git clone https://github.com/IBM/powerai-vision-object-detection
 
 Use your browser to access the PowerAI Vision web UI for steps 3-6.
 
-### 3. Create a dataset
+### 3. Create a data set
 
 PowerAI Vision Object Detection discovers and labels objects within an image, enabling users and developers to count instances of objects within an image based on customized training.
 
-To create a new dataset for object detection training:
+To create a new data set for object detection training:
 
-* From the `My Data Sets` view, click the `Add Dataset` button and then select `For Object Detection` in the pull-down.
+* Use the `Data Sets` tab and click on the `Create new data set` card.
 
-  ![add_dataset](doc/source/images/add_dataset.png)
+  ![create_new_dataset](doc/source/images/create_new_dataset.png)
 
-* Provide a DataSet Name and click `Add Dataset`.
+* Provide a data set name and click `Create`.
 
-  <img alt="add_dataset_name" src="doc/source/images/add_dataset_name.png" width="400">
+* A new data set card will appear. Click on the new card.
 
-* Upload one or more images using drag-and-drop or `Select some`. You can use [powerai-vision-object-detection/data/coke_bottles.zip](https://github.com/IBM/powerai-vision-object-detection/raw/master/data/coke_bottles.zip) from your cloned repo to upload many at once.
+* Upload one or more images using drag-and-drop or `Import files`. You can use `data/coke_bottles.zip` from your cloned repo to upload many at once.
 
-  ![update_dataset](doc/source/images/update_dataset.png)
+### 4. Label the objects
 
-  > Note: If you are using your own zip file and do not see file thumbnails after the upload, then the upload failed. Use lowercase file names without special characters or spaces. You can also upload individual files or multi-select several at a time to determine which file caused the upload to fail.
+* Create new object labels for the data set by clicking `+ Add object` under the `Objects` pulldown in the sidebar. To add multiple object labels, enter one label, click `Add`, then enter the next until you are done and then hit `OK`. For our example data set, add "Coca Cola", "Diet Coke", and "Coke Zero".
 
-### 4. Create tags and label objects
+* Label the objects in each image by clicking on the image card and hitting `Label objects`. Then choose `Box` from the bottom left. Select the label to use on the left and then click and drag to draw a bounding box around each object of that type in the image.
 
-* Create one or more tags by clicking the `+` icon to add a new tag. Each tag will represent the training objects within the image based on specific use cases (e.g., "Coca-Cola", "Diet Coke", "Coke Zero").
+Press `Save` when done with each image.
 
-* Label the objects in each image by selecting a tag and dragging a bounding box around the object in the image. Press `Save` when done with each image.
-
-* Repeat this process for all tags and all images.
+* Repeat this process for all labels and all images.
 
   > Note: You can import [powerai-vision-object-detection/data/coke_bottles_exported.zip](https://github.com/IBM/powerai-vision-object-detection/raw/master/data/coke_bottles_exported.zip) which was already labeled and exported.
 
   ![add_dataset](doc/source/images/save_labels.png)
 
-  > Tip: Use the `Only Show Unlabeled Files` pull-down to help you see when you are done.
+  > Tip: Use the `Unlabeled` object filter to help you see when you are done.
 
-* You can use the `Data Augmentation` button to expand your dataset. Label the original images first and be sure to consider whether mirror images (horizontal or vertical) are appropriate for your use case. If you use data augmentation, a new expanded dataset will be created for you.
+* You can use the `Augment data` button to expand your data set. Label the original images first and be sure to consider whether flipped images (horizontal or vertical) are appropriate for your use case. If you use data augmentation, a new expanded data set will be created for you.
 
-* Click `Export As Zip File` to save a copy of your work. Now that you've spent some time labeling, this zip will let you start over without losing your work.
+* Click `Export data set` to save a copy of your work. Now that you've spent some time labeling, this zip will let you start over without losing your work.
 
-### 5. Create a DL task
+### 5. Train the model
 
-* Click on `My DL Tasks` under My Workspace and then click the `Create New Task` button. Click on `Object Detection`.
+* Open your augmented data set and click `Train model` (just use the original if you did not augment).
 
-* Give the Object Detector a name and make sure your dataset is selected, then click `Build Model`.
+* Be sure to select `Object detection` as the `Type of training`.
+
+* Select a model for speed or accuracy.
+
+* Take a look at the `Advanced options`. You can keep the defaults, but if you'd like to speed things up, try reducing the `Max iteration`.
+
+* Click the `Train` button.
 
   ![build_model](doc/source/images/build_model.png)
 
-* A confirmation dialog will give you a time estimate.  Click `Create New Task` to get it started.
+* When the training is done, click `Model details` to see some metrics and graphical description of the model accuracy.
 
-  <img alt="create_task_confirm" src="doc/source/images/create_task_confirm.png" width="400">
+  ![model_details](doc/source/images/model_details.png)
 
 ### 6. Deploy and test
 
-* When the model is built, click on `Deploy and Test`.
+* Click `Deploy model` and `Deploy` to make the model available via an API endpoint.
 
-  ![model_built](doc/source/images/model_built.png)
+* `Copy` the API endpoint from your deployed model. Use this to test with `curl` (below) and to set the `POWERAI_VISION_WEB_API_URL` for the web app (in step 7).
 
-* Test your model in the PowerAI Vision UI. Use `Select some` to choose a test image. The result shows you how many objects were detected and the image is shown with bounding boxes, labels and confidence scores.
+* Test your model in the PowerAI Vision UI. Use `Import` to choose a test image. The result shows you the image with bounding boxes around the detected objects and a table showing the labels and confidence scores.
 
   ![test_ui](doc/source/images/test_ui.png)
-
-* Copy the API endpoint from your deployed model. Use this to test with `curl` (below) and to set the `POWERAI_VISION_WEB_API_URL` for the web app (in step 7).
 
 * From a command-line, you can test your deployed REST endpoint using an image file and the `curl` command. Notice the output JSON shows multiple bottles were detected and provides the confidence, label and location for each of them.
   > Warning: this example used `--insecure` for convenience.
 
   ```bash
-  $ curl --insecure -i -F files=@coke_bottle_23.png https://ny1.ptopenlab.com/AIVision/api/dlapis/9f9d6787-0183-4a1b-be49-751b6ca16724
+  $ cd data/test_set
+  $ curl --insecure -i -F files=@coke_bottle_23.png https://host-or-ip-addr/powerai-vision-ny/api/dlapis/e4d6101f-3337-49ae-a6ba-5cb5305b28d9
   HTTP/1.1 100 Continue
 
   HTTP/1.1 200 OK
-  Server: nginx/1.9.13
-  Date: Thu, 14 Dec 2017 21:58:26 GMT
+  Server: nginx/1.15.6
+  Date: Thu, 15 Aug 2019 19:38:26 GMT
   Content-Type: application/json
-  Content-Length: 508
+  Content-Length: 726
   Connection: keep-alive
+  Vary: Accept-Encoding
+  X-Powered-By: Servlet/3.1
   Access-Control-Allow-Origin: *
-  Access-Control-Allow-Headers: origin, content-type, accept, authorization
+  Access-Control-Allow-Headers: X-Auth-Token, origin, content-type, accept, authorization
   Access-Control-Allow-Credentials: true
   Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS, HEAD
-  Access-Control-Allow-Origin: *
-
-  { "classified" : [ { "confidence" : 0.9986369013786316 , "ymax" : 578 , "label" : "coca-cola" , "xmax" : 755 , "xmin" : 588 , "ymin" : 29} , { "confidence" : 0.9954010248184204 , "ymax" : 592 , "label" : "coca-cola" , "xmax" : 601 , "xmin" : 437 , "ymin" : 10} , { "confidence" : 0.8161203265190125 , "ymax" : 567 , "label" : "coca-cola" , "xmax" : 426 , "xmin" : 259 , "ymin" : 17}] , "imageUrl" : "http://ny1.ptopenlab.com:443/AIVision/temp/5a26dd3b-d8ba-4e01-8b93-5a43f28e97c7.png" , "result" : "success"}
+  Content-Language: en
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Strict-Transport-Security: max-age=15724800; includeSubDomains
+  
+  {"webAPIId":"e4d6101f-3337-49ae-a6ba-5cb5305b28d9","imageUrl":"http://host-or-ip-addr:9080/powerai-vision-ny-api/uploads/temp/e4d6101f-3337-49ae-a6ba-5cb5305b28d9/74fc7055-6f7c-4622-b82f-85cb550c615d.png","imageMd5":"ea1f6444fa7dabeda7049d426699879c","classified":[{"confidence":0.9952329993247986,"ymax":547,"label":"coca cola","xmax":584,"xmin":423,"ymin":0,"attr":[{}]},{"confidence":0.9947130084037781,"ymax":544,"label":"coca cola","xmax":757,"xmin":595,"ymin":7,"attr":[{}]},{"confidence":0.9565696716308594,"ymax":513,"label":"coca cola","xmax":229,"xmin":66,"ymin":0,"attr":[{}]},{"confidence":0.9552424550056458,"ymax":510,"label":"coca cola
   ```
 
 ### 7. Run the app
@@ -170,6 +169,7 @@ An example web app demonstrates how to upload a picture, use the trained and dep
 Use the [Deploy to IBM Cloud](#deploy-to-ibm-cloud) button **OR** [Run locally](#run-locally).
 
 #### Deploy to IBM Cloud
+
 [![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/IBM/powerai-vision-object-detection)
 
 1. Press the above `Deploy to IBM Cloud` button, click `Create+` to create an *IBM Cloud API Key* and then click on `Deploy`.
@@ -215,22 +215,22 @@ Use your cloned repo to build and run the web app.
 
 * The UI will show an error message, if you did not configure your POWERAI_VISION_WEB_API_URL or if your API is not deployed (in SuperVessel you can quickly redeploy every hour).
 
-# Links
+## Links
 
 * [Demo on Youtube](https://www.youtube.com/watch?v=xoLcXQs4SP4): Watch the video
 * [Object Detection](https://en.wikipedia.org/wiki/Object_detection): Object detection on Wikipedia
-* [PowerAI Vision](https://developer.ibm.com/linuxonpower/deep-learning-powerai/technology-previews/powerai-vision/): Deep Learning and PowerAI Development
+* [PowerAI Vision](https://developer.ibm.com/linuxonpower/deep-learning-powerai/vision/): Deep Learning and PowerAI Development
 * [TensorFlow Object Detection](https://ai.googleblog.com/2017/06/supercharge-your-computer-vision-models.html): Supercharge your Computer Vision models with the TensorFlow Object Detection API
 * [AI Article](https://www.entrepreneur.com/article/283990): Can Artificial Intelligence Identify Pictures Better than Humans?
 * [From the developers](https://developer.ibm.com/linuxonpower/2017/08/30/ibm-powerai-vision-speeds-transfer-learning-greater-accuracy-real-world-example/): IBM PowerAI Vision speeds transfer learning with greater accuracy -- a real world example
 
-# Learn more
+## Learn more
 
-* **Artificial Intelligence Code Patterns**: Enjoyed this Code Pattern? Check out our other [AI Code Patterns](https://developer.ibm.com/technologies/artificial-intelligence/).
-* **AI and Data Code Pattern Playlist**: Bookmark our [playlist](https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde) with all of our Code Pattern videos
+* **Artificial Intelligence code patterns**: Enjoyed this code pattern? Check out our other [AI code patterns](https://developer.ibm.com/technologies/artificial-intelligence/).
+* **AI and Data code pattern playlist**: Bookmark our [playlist](https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde) with all of our code pattern videos
 * **PowerAI**: Get started or get scaling, faster, with a software distribution for machine learning running on the Enterprise Platform for AI: [IBM Power Systems](https://www.ibm.com/ms-en/marketplace/deep-learning-platform)
 
-# License
+## License
 
 This code pattern is licensed under the Apache License, Version 2. Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1](https://developercertificate.org/) and the [Apache License, Version 2](https://www.apache.org/licenses/LICENSE-2.0.txt).
 
