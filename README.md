@@ -45,7 +45,7 @@ Go [here](https://developer.ibm.com/linuxonpower/deep-learning-powerai/try-power
 to learn more about trial access (when available)
 and try PowerAI Vision in the cloud or download a PowerAI Vision trial to install on your own Power Systems.
 
-*This code pattern was built with the PowerAI Vision Technology Preview v3.0. The app has now been tested with PowerAI Vision 1.1.3, but the UI screenshots and instructions have not yet been updated.*
+*This code pattern was tested with PowerAI Vision 1.1.4.*
 
 ## Steps
 
