@@ -174,7 +174,7 @@ Use the [Deploy to IBM Cloud](#deploy-to-ibm-cloud) button **OR** [Run locally](
 
 1. Press the above `Deploy to IBM Cloud` button, click `Create+` to create an *IBM Cloud API Key* and then click on `Deploy`.
 
-1. In Toolchains, click on Delivery Pipeline to watch while the app is deployed.
+1. In Toolchains, click on `Delivery Pipeline` to watch while the app is deployed.
 
 1. Use the IBM Cloud dashboard to manage the app. The app is named `powerai-vision-object-detection` with a unique suffix.
 
