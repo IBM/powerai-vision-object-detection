@@ -134,6 +134,9 @@ Press `Save` when done with each image.
   ![test_ui](doc/source/images/test_ui.png)
 
 * From a command-line, you can test your deployed REST endpoint using an image file and the `curl` command. Notice the output JSON shows multiple bottles were detected and provides the confidence, label and location for each of them.
+
+* Make sure to unzip the `test_set.zip` file in the `data` directory.
+
   > Warning: this example used `--insecure` for convenience.
 
   ```bash
