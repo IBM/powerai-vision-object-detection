@@ -45,6 +45,7 @@ app.post('/uploadpic', function(req, result) {
   } else {
     req.pipe(request.post({
       url: poweraiVisionWebApiUrl,
+      gzip: true,
       agentOptions: {
         rejectUnauthorized: false,
       }}, function(err, resp, body) {
