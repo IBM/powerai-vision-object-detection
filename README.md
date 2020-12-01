@@ -1,6 +1,9 @@
-# Object detection with PowerAI Vision
+# Object detection with Maximo Visual Inspection (Formerly PowerAI Vision)
 
-In this code pattern, we will use PowerAI Vision Object Detection
+> Note: This repo has been updated to use Maximo Visual Inspection(Formerly PowerAI Vision).
+**Same product, new name. Previously called PowerAI Vision.**
+
+In this code pattern, we will use Maximo Visual Inspection
 to detect and label objects, within an image, based on customized
 training.
 
@@ -11,17 +14,17 @@ Once we train and deploy a model, we'll have a REST endpoint
 that allows us locate and count Coke bottles in an image.
 
 Deep learning training will be used to create a model for
-Object Detection. With PowerAI Vision, deep learning training is
+Object Detection. With Maximo Visual Inspection, deep learning training is
 as easy as a few clicks of a mouse. Once the task has completed,
 the model can be deployed with another click.
 
-PowerAI Vision presents REST APIs for inference operations.
+Maximo Visual Inspection presents REST APIs for inference operations.
 Object detection with your custom model can be used from any REST
-client and can also be tested in the PowerAI Vision UI.
+client and can also be tested in the Maximo Visual Inspection UI.
 
 When the reader has completed this code pattern, they will understand how to:
 
-* Create a data set for object detection with PowerAI Vision
+* Create a data set for object detection with Maximo Visual Inspection (Formerly PowerAI Vision)
 * Train and deploy a model based on the data set
 * Test the model via REST calls
 
@@ -29,9 +32,9 @@ When the reader has completed this code pattern, they will understand how to:
 
 ## Flow
 
-1. User uploads images to create a PowerAI Vision data set
+1. User uploads images to create a Maximo Visual Inspection data set
 1. User labels objects in the image data set prior to training
-1. The model is trained, deployed and tested in PowerAI Vision
+1. The model is trained, deployed and tested in Maximo Visual Inspection web interface
 1. User can detect objects in images using a REST client
 
 ## Watch the Video
@@ -40,17 +43,17 @@ When the reader has completed this code pattern, they will understand how to:
 
 ## Prerequisites
 
-This code pattern requires PowerAI Vision.
-Go [here](https://developer.ibm.com/linuxonpower/deep-learning-powerai/try-powerai/)
-to learn more about trial access (when available)
-and try PowerAI Vision in the cloud or download a PowerAI Vision trial to install on your own Power Systems.
+This code pattern requires Maximo Visual Inspection.
 
-*This code pattern was tested with PowerAI Vision 1.1.4.*
+Go [here](https://www.ibm.com/support/pages/ibm-maximo-visual-inspection)
+to learn more about trial access (Scroll down to the `Give it a try` section)..
+
+*This code pattern was tested with Maximo Visual Inspection 1.3.0*
 
 ## Steps
 
 1. [Clone the repo](#1-clone-the-repo)
-2. [Login to PowerAI Vision](#2-login-to-powerai-vision)
+2. [Login to Maximo Visual Inspection](#2-login-to-Maximo-visual-Inspection)
 3. [Create a data set](#3-create-a-data-set)
 4. [Label the objects](#4-label-the-objects)
 5. [Train the model](#5-train-the-model)
@@ -65,13 +68,16 @@ Clone the `powerai-vision-object-detection` locally. In a terminal, run:
 git clone https://github.com/IBM/powerai-vision-object-detection
 ```
 
-### 2. Login to PowerAI Vision
+### 2. Login to Maximo Visual Inspection
 
-Use your browser to access the PowerAI Vision web UI for steps 3-6.
+Use your browser to access the Maximo Visual Inspection web UI for steps 3-6.
+
+> Note: The images below show the old PowerAI Vision UI, but the interface is nearly the same except the new product name.
 
 ### 3. Create a data set
 
-PowerAI Vision Object Detection discovers and labels objects within an image, enabling users and developers to count instances of objects within an image based on customized training.
+Maximo Visual Inspection Object Detection discovers and labels objects within an image, enabling users and developers to count instances of objects within an 
+image based on customized training.
 
 To create a new data set for object detection training:
 
@@ -129,7 +135,7 @@ Press `Save` when done with each image.
 
 * `Copy` the API endpoint from your deployed model. Use this to test with `curl` (below) and to set the `POWERAI_VISION_WEB_API_URL` for the web app (in step 7).
 
-* Test your model in the PowerAI Vision UI. Use `Import` to choose a test image. The result shows you the image with bounding boxes around the detected objects and a table showing the labels and confidence scores.
+* Test your model in the Maximo Visual Inspection UI. Use `Import` to choose a test image. The result shows you the image with bounding boxes around the detected objects and a table showing the labels and confidence scores.
 
   ![test_ui](doc/source/images/test_ui.png)
 
@@ -221,10 +227,9 @@ Use your cloned repo to build and run the web app.
 * The UI will show an error message, if you did not configure your POWERAI_VISION_WEB_API_URL or if your API is not deployed (in SuperVessel you can quickly redeploy every hour).
 
 ## Links
-
-* [Demo on Youtube](https://www.youtube.com/watch?v=xoLcXQs4SP4): Watch the video
+* [Maximo Visual Inspection Learning Path](https://developer.ibm.com/technologies/vision/series/learning-path-powerai-vision/): From computer vision basics to creating your own apps.
+* [Demo on YouTube](https://www.youtube.com/watch?v=xoLcXQs4SP4): Watch the video
 * [Object Detection](https://en.wikipedia.org/wiki/Object_detection): Object detection on Wikipedia
-* [PowerAI Vision](https://developer.ibm.com/linuxonpower/deep-learning-powerai/vision/): Deep Learning and PowerAI Development
 * [TensorFlow Object Detection](https://ai.googleblog.com/2017/06/supercharge-your-computer-vision-models.html): Supercharge your Computer Vision models with the TensorFlow Object Detection API
 * [AI Article](https://www.entrepreneur.com/article/283990): Can Artificial Intelligence Identify Pictures Better than Humans?
 * [From the developers](https://developer.ibm.com/linuxonpower/2017/08/30/ibm-powerai-vision-speeds-transfer-learning-greater-accuracy-real-world-example/): IBM PowerAI Vision speeds transfer learning with greater accuracy -- a real world example
