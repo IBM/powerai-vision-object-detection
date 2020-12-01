@@ -135,34 +135,36 @@ Press `Save` when done with each image.
 
 * From a command-line, you can test your deployed REST endpoint using an image file and the `curl` command. Notice the output JSON shows multiple bottles were detected and provides the confidence, label and location for each of them.
 
-* Make sure to unzip the `test_set.zip` file in the `data` directory.
+* Make sure to unzip the `test_set.zip` file in the `data` directory. 
 
   > Warning: this example used `--insecure` for convenience.
 
   ```bash
   $ cd data/test_set
-  $ curl --insecure -i -F files=@coke_bottle_23.png https://host-or-ip-addr/powerai-vision-ny/api/dlapis/e4d6101f-3337-49ae-a6ba-5cb5305b28d9
-  HTTP/1.1 100 Continue
+  $ curl --compressed --insecure -i -F files=@coke_bottle_23.png https://host-or-ip-addr/powerai-vision-ny/api/dlapis/e4d6101f-3337-49ae-a6ba-5cb5305b28d9
 
-  HTTP/1.1 200 OK
-  Server: nginx/1.15.6
-  Date: Thu, 15 Aug 2019 19:38:26 GMT
-  Content-Type: application/json
-  Content-Length: 726
-  Connection: keep-alive
-  Vary: Accept-Encoding
-  X-Powered-By: Servlet/3.1
-  Access-Control-Allow-Origin: *
-  Access-Control-Allow-Headers: X-Auth-Token, origin, content-type, accept, authorization
-  Access-Control-Allow-Credentials: true
-  Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS, HEAD
-  Content-Language: en
-  X-Frame-Options: SAMEORIGIN
-  X-Content-Type-Options: nosniff
-  X-XSS-Protection: 1; mode=block
-  Strict-Transport-Security: max-age=15724800; includeSubDomains
+  My request looked like the following: 
   
-  {"webAPIId":"e4d6101f-3337-49ae-a6ba-5cb5305b28d9","imageUrl":"http://host-or-ip-addr:9080/powerai-vision-ny-api/uploads/temp/e4d6101f-3337-49ae-a6ba-5cb5305b28d9/74fc7055-6f7c-4622-b82f-85cb550c615d.png","imageMd5":"ea1f6444fa7dabeda7049d426699879c","classified":[{"confidence":0.9952329993247986,"ymax":547,"label":"coca cola","xmax":584,"xmin":423,"ymin":0,"attr":[{}]},{"confidence":0.9947130084037781,"ymax":544,"label":"coca cola","xmax":757,"xmin":595,"ymin":7,"attr":[{}]},{"confidence":0.9565696716308594,"ymax":513,"label":"coca cola","xmax":229,"xmin":66,"ymin":0,"attr":[{}]},{"confidence":0.9552424550056458,"ymax":510,"label":"coca cola
+  curl --compressed --insecure -i -F files=@coke_bottle_23.png https://vision-p.aus.stglabs.ibm.com/visual-inspection-v130-prod/api/dlapis/6e0a7-d9da-4314-a350-d9a2c0f2b
+
+  HTTP/2 200 
+  server: nginx/1.15.6
+  date: Tue, 01 Dec 2020 17:22:14 GMT
+  content-type: application/json
+  vary: Accept-Encoding
+  x-powered-by: Servlet/3.1
+  access-control-allow-origin: *
+  access-control-allow-headers: X-Auth-Token, origin, content-type, accept, authorization
+  access-control-allow-credentials: true
+  access-control-allow-methods: GET, POST, PUT, DELETE, OPTIONS, HEAD
+  content-language: en
+  x-frame-options: SAMEORIGIN
+  x-content-type-options: nosniff
+  x-xss-protection: 1; mode=block
+  strict-transport-security: max-age=15724800; includeSubDomains
+  content-encoding: gzip
+
+  {"webAPIId":"6e3480a7-d9da-4314-a350-d9aac22c0f2b","imageUrl":"http://vision-v130-prod-service:9080/vision-v130-prod-api/uploads/temp/6e3480a7-d9da-4314-a350-d9aac22c0f2b/c62cc7dc-dbc2-448d-85e8-41485a2c17f5.png","imageMd5":"ea1f6444fa7dabeda7049d426699879c","classified":[{"label":"Coke","confidence":0.995542585849762,"xmin":601,"ymin":29,"xmax":763,"ymax":546,"attr":[{}]},{"label":"Coke","confidence":0.982393741607666,"xmin":447,"ymin":40,"xmax":593,"ymax":572,"attr":[{}]},{"label":"Coke","confidence":0.8604443669319153,"xmin":67,"ymin":18,"xmax":245,"ymax":604,"attr":[{}]},{"label":"Coke","confidence":0.8339363932609558,"xmin":269,"ymin":32,"xmax":422,"ymax":589,"attr":[{}]}],"result":"success"}
   ```
 
 ### 7. Run the app
