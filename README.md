@@ -48,7 +48,7 @@ This code pattern requires Maximo Visual Inspection.
 Go [here](https://www.ibm.com/support/pages/ibm-maximo-visual-inspection)
 to learn more about trial access (Scroll down to the `Give it a try` section)..
 
-*This code pattern was tested with Maximo Visual Inspection 1.3.0*
+> Note: *This code pattern was tested with Maximo Visual Inspection 1.3.0*
 
 ## Steps
 
@@ -76,7 +76,7 @@ Use your browser to access the Maximo Visual Inspection web UI for steps 3-6.
 
 ### 3. Create a data set
 
-Maximo Visual Inspection Object Detection discovers and labels objects within an image, enabling users and developers to count instances of objects within an 
+Maximo Visual Inspection Object Detection discovers and labels objects within an image, enabling users and developers to count instances of objects within an
 image based on customized training.
 
 To create a new data set for object detection training:
@@ -141,7 +141,7 @@ Press `Save` when done with each image.
 
 * From a command-line, you can test your deployed REST endpoint using an image file and the `curl` command. Notice the output JSON shows multiple bottles were detected and provides the confidence, label and location for each of them.
 
-* Make sure to unzip the `test_set.zip` file in the `data` directory. 
+* Make sure to unzip the `test_set.zip` file in the `data` directory.
 
   > Warning: this example used `--insecure` for convenience.
 
@@ -149,11 +149,11 @@ Press `Save` when done with each image.
   $ cd data/test_set
   $ curl --compressed --insecure -i -F files=@coke_bottle_23.png https://host-or-ip-addr/powerai-vision-ny/api/dlapis/e4d6101f-3337-49ae-a6ba-5cb5305b28d9
 
-  My request looked like the following: 
+  My request looked like the following:
   
   curl --compressed --insecure -i -F files=@coke_bottle_23.png https://vision-p.aus.stglabs.ibm.com/visual-inspection-v130-prod/api/dlapis/6e0a7-d9da-4314-a350-d9a2c0f2b
 
-  HTTP/2 200 
+  HTTP/2 200
   server: nginx/1.15.6
   date: Tue, 01 Dec 2020 17:22:14 GMT
   content-type: application/json
@@ -202,7 +202,7 @@ Use the [Deploy to IBM Cloud](#deploy-to-ibm-cloud) button **OR** [Run locally](
 
 Use your cloned repo to build and run the web app.
 
-> NOTE: These steps are only needed when running locally instead of using the ``Deploy to IBM Cloud`` button.
+> Note: These steps are only needed when running locally instead of using the ``Deploy to IBM Cloud`` button.
 
 * Copy the env.sample to .env. Edit the file to set the URL to point to the web API that you deployed (above).
 
@@ -227,6 +227,7 @@ Use your cloned repo to build and run the web app.
 * The UI will show an error message, if you did not configure your POWERAI_VISION_WEB_API_URL or if your API is not deployed (in SuperVessel you can quickly redeploy every hour).
 
 ## Links
+
 * [Maximo Visual Inspection Learning Path](https://developer.ibm.com/technologies/vision/series/learning-path-powerai-vision/): From computer vision basics to creating your own apps.
 * [Demo on YouTube](https://www.youtube.com/watch?v=xoLcXQs4SP4): Watch the video
 * [Object Detection](https://en.wikipedia.org/wiki/Object_detection): Object detection on Wikipedia
