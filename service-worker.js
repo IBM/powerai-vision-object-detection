@@ -34,7 +34,7 @@ self.addEventListener('install', function(event) {
           .then(function(cache) {
             console.log('cache opened');
             return cache.addAll(urlstocache);
-          })
+          }),
   );
 });
 
@@ -50,8 +50,8 @@ self.addEventListener('activate', function(event) {
               return key !== CACHE_NAME;
             }).map(function(key) {
               return caches.delete(key);
-            })
+            }),
         );
-      })
+      }),
   );
 });
