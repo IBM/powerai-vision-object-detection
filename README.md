@@ -28,7 +28,7 @@ When the reader has completed this code pattern, they will understand how to:
 * Train and deploy a model based on the data set
 * Test the model via REST calls
 
-![architecture](doc/source/images/architecture.png)
+![architecture](doc/source/images/Locate-and-count-items-in-an-image-with-object-detection-flow-arch-10.png)
 
 ## Flow
 
