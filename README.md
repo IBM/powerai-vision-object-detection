@@ -1,3 +1,7 @@
+# WARNING: This repository is no longer maintained
+
+> This repository will not be updated. The repository will be kept available in read-only mode.
+
 # Object detection with Maximo Visual Inspection (Formerly PowerAI Vision)
 
 > Note: This repo has been updated to use Maximo Visual Inspection(Formerly PowerAI Vision).
